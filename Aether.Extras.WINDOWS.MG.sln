@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDSImporter.WINDOWS.MG", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawModelProcessor.WINDOWS.MG", "Content.Pipeline\RawModelProcessor\RawModelProcessor.WINDOWS.MG.csproj", "{48E4029A-115C-4DC2-AF3A-0AB94F36BFC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsImporters.WINDOWS.MG", "Content.Pipeline\GraphicsImporters\GraphicsImporters.WINDOWS.MG.csproj", "{400DC7B2-739D-4156-916D-2F2E1920310D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Graphics.WINDOWS.MG", "Graphics\Aether.Graphics.WINDOWS.MG.csproj", "{0A4ED2DF-9CDD-4C98-83AA-1898A394AC27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{48E4029A-115C-4DC2-AF3A-0AB94F36BFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48E4029A-115C-4DC2-AF3A-0AB94F36BFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48E4029A-115C-4DC2-AF3A-0AB94F36BFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{400DC7B2-739D-4156-916D-2F2E1920310D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400DC7B2-739D-4156-916D-2F2E1920310D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400DC7B2-739D-4156-916D-2F2E1920310D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400DC7B2-739D-4156-916D-2F2E1920310D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4ED2DF-9CDD-4C98-83AA-1898A394AC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4ED2DF-9CDD-4C98-83AA-1898A394AC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4ED2DF-9CDD-4C98-83AA-1898A394AC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4ED2DF-9CDD-4C98-83AA-1898A394AC27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +42,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{26C387C6-7313-47D4-A05F-14639AB02D70} = {A921886B-C6F7-4FF8-8668-EC20004C464A}
 		{48E4029A-115C-4DC2-AF3A-0AB94F36BFC0} = {A921886B-C6F7-4FF8-8668-EC20004C464A}
+		{400DC7B2-739D-4156-916D-2F2E1920310D} = {A921886B-C6F7-4FF8-8668-EC20004C464A}
 	EndGlobalSection
 EndGlobal

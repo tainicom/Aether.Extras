@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Content.Pipeline", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawModelProcessor.PORTABLE", "Content.Pipeline\RawModelProcessor\RawModelProcessor.PORTABLE.csproj", "{C3218A39-5491-44BF-B820-754832E318DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsImporters.PORTABLE", "Content.Pipeline\GraphicsImporters\GraphicsImporters.PORTABLE.csproj", "{0A079394-D331-433A-94DF-AA25B6522279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Graphics.PORTABLE", "Graphics\Aether.Graphics.PORTABLE.csproj", "{3E3BB349-662A-4628-B033-154CB8CD2F2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,20 @@ Global
 		{C3218A39-5491-44BF-B820-754832E318DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3218A39-5491-44BF-B820-754832E318DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3218A39-5491-44BF-B820-754832E318DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A079394-D331-433A-94DF-AA25B6522279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A079394-D331-433A-94DF-AA25B6522279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A079394-D331-433A-94DF-AA25B6522279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A079394-D331-433A-94DF-AA25B6522279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3BB349-662A-4628-B033-154CB8CD2F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3BB349-662A-4628-B033-154CB8CD2F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3BB349-662A-4628-B033-154CB8CD2F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3BB349-662A-4628-B033-154CB8CD2F2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C3218A39-5491-44BF-B820-754832E318DB} = {717F89BC-8423-4E7C-A834-460CFD62B1E3}
+		{0A079394-D331-433A-94DF-AA25B6522279} = {717F89BC-8423-4E7C-A834-460CFD62B1E3}
 	EndGlobalSection
 EndGlobal
