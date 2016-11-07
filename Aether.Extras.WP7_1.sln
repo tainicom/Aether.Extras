@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Animation.WP7_1", "Animation\Aether.Animation.WP7_1.csproj", "{08932BB0-C3E4-489B-9A45-1649730A9CDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Windows Phone = Debug|Windows Phone
+		Release|Windows Phone = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08932BB0-C3E4-489B-9A45-1649730A9CDB}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{08932BB0-C3E4-489B-9A45-1649730A9CDB}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
+		{08932BB0-C3E4-489B-9A45-1649730A9CDB}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{08932BB0-C3E4-489B-9A45-1649730A9CDB}.Release|Windows Phone.Build.0 = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
