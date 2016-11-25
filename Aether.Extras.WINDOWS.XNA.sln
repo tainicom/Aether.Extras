@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationImporters.WINDOWS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Animation.WINDOWS.XNA", "Animation\Aether.Animation.WINDOWS.XNA.csproj", "{1BD2DBC0-D366-42F7-9369-F566CCD01C03}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Shaders", "Aether.Shaders", "{EFC7A27C-C20B-4BE7-8B3A-2B109991D704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Shaders.FXAA.WINDOWS.XNA", "Shaders\FXAA\Aether.Shaders.FXAA.WINDOWS.XNA.csproj", "{89E0198E-7298-411A-B5C1-61F2754A3F80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -33,6 +37,10 @@ Global
 		{1BD2DBC0-D366-42F7-9369-F566CCD01C03}.Debug|x86.Build.0 = Debug|x86
 		{1BD2DBC0-D366-42F7-9369-F566CCD01C03}.Release|x86.ActiveCfg = Release|x86
 		{1BD2DBC0-D366-42F7-9369-F566CCD01C03}.Release|x86.Build.0 = Release|x86
+		{89E0198E-7298-411A-B5C1-61F2754A3F80}.Debug|x86.ActiveCfg = Debug|x86
+		{89E0198E-7298-411A-B5C1-61F2754A3F80}.Debug|x86.Build.0 = Debug|x86
+		{89E0198E-7298-411A-B5C1-61F2754A3F80}.Release|x86.ActiveCfg = Release|x86
+		{89E0198E-7298-411A-B5C1-61F2754A3F80}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{565ACF47-7E36-435E-8727-2AFB39E61134} = {F6B6E505-6037-49E4-9060-8B29A7B99BC1}
 		{E22F02E7-6799-4C14-B9B3-B461D6E9AB6E} = {F6B6E505-6037-49E4-9060-8B29A7B99BC1}
+		{89E0198E-7298-411A-B5C1-61F2754A3F80} = {EFC7A27C-C20B-4BE7-8B3A-2B109991D704}
 	EndGlobalSection
 EndGlobal

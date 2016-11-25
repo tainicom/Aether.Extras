@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Animation.W8_1", "Animation\Aether.Animation.W8_1.csproj", "{AEE9C708-BDBD-4E8B-B85F-2DB9FA717436}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Shaders", "Aether.Shaders", "{7D8D1AE1-8482-4FDD-B7E8-5AA9C06C3F66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Shaders.FXAA.W8_1", "Shaders\FXAA\Aether.Shaders.FXAA.W8_1.csproj", "{A8768C08-09ED-4A35-90CE-6A30168F720B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,15 @@ Global
 		{AEE9C708-BDBD-4E8B-B85F-2DB9FA717436}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEE9C708-BDBD-4E8B-B85F-2DB9FA717436}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEE9C708-BDBD-4E8B-B85F-2DB9FA717436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A8768C08-09ED-4A35-90CE-6A30168F720B} = {7D8D1AE1-8482-4FDD-B7E8-5AA9C06C3F66}
 	EndGlobalSection
 EndGlobal

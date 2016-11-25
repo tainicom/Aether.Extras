@@ -16,3 +16,8 @@ VertexBuffer & IndexBuffers, make them Dynamic and WriteOnly.
 
 Play animated 3D models and support for CPU animation.
 CPU animation is optimized using unsafe code, writing directly to mapped VertexBuffer memory using reflection (DirectX) and unmanaged/C++ code (WP8.0). 
+
+
+## tainicom.Aether.Shaders
+
+* 'FXAA' - MonoGame port of NVIDIA's FXAA 3.11 shader.
