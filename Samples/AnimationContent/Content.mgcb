@@ -1,0 +1,39 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\..\..\..\..\Aether.Extras\bin\Debug\Windows\Aether.Content.Pipeline.AnimationImporters.dll
+/reference:..\..\..\..\..\Aether.Extras\bin\Debug\Windows\Aether.Content.Pipeline.GraphicsImporters.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
+
+#begin Dude/dude.xnb
+/copy:Dude/dude.xnb
+
+#begin Dude/head_0.xnb
+/copy:Dude/head_0.xnb
+
+#begin Dude/jacket_0.xnb
+/copy:Dude/jacket_0.xnb
+
+#begin Dude/pants_0.xnb
+/copy:Dude/pants_0.xnb
+
+#begin Dude/upBodyC_0.xnb
+/copy:Dude/upBodyC_0.xnb
+

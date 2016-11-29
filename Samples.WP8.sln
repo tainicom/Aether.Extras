@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Animation.WP8", "Animation\Aether.Animation.WP8.csproj", "{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tainicom.Aether.Native.Animation", "Native.Animation\Aether.Native.Animation.WP8.vcxproj", "{22C72DC0-022D-4D1B-B738-C764F67421EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{232833BF-3DB3-4EBE-B1C2-AA627811D5D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Animation.WP8", "Samples\Animation\Samples.Animation.WP8.csproj", "{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Debug|ARM.Build.0 = Debug|ARM
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Debug|x86.ActiveCfg = Debug|x86
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Debug|x86.Build.0 = Debug|x86
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Release|ARM.ActiveCfg = Release|ARM
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Release|ARM.Build.0 = Release|ARM
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Release|x86.ActiveCfg = Release|x86
+		{8029B300-3608-4C01-BEF5-3F7BC3F9E58E}.Release|x86.Build.0 = Release|x86
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Debug|ARM.Build.0 = Debug|ARM
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Debug|x86.ActiveCfg = Debug|Win32
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Debug|x86.Build.0 = Debug|Win32
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Release|ARM.ActiveCfg = Release|ARM
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Release|ARM.Build.0 = Release|ARM
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Release|x86.ActiveCfg = Release|Win32
+		{22C72DC0-022D-4D1B-B738-C764F67421EA}.Release|x86.Build.0 = Release|Win32
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|ARM.Build.0 = Debug|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|ARM.Deploy.0 = Debug|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|x86.ActiveCfg = Debug|x86
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|x86.Build.0 = Debug|x86
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Debug|x86.Deploy.0 = Debug|x86
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|ARM.ActiveCfg = Release|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|ARM.Build.0 = Release|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|ARM.Deploy.0 = Release|ARM
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|x86.ActiveCfg = Release|x86
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|x86.Build.0 = Release|x86
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CFAB910-02C9-49B5-AE60-D96FFB83FBE1} = {232833BF-3DB3-4EBE-B1C2-AA627811D5D3}
+	EndGlobalSection
+EndGlobal
