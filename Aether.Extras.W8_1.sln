@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Shaders", "Aether.Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Shaders.FXAA.W8_1", "Shaders\FXAA\Aether.Shaders.FXAA.W8_1.csproj", "{A8768C08-09ED-4A35-90CE-6A30168F720B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Shaders.Deferred.W8_1", "Shaders\Deferred\Aether.Shaders.Deferred.W8_1.csproj", "{42B24719-1CD5-49AB-A76E-AD55EE44262E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +25,16 @@ Global
 		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8768C08-09ED-4A35-90CE-6A30168F720B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B24719-1CD5-49AB-A76E-AD55EE44262E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B24719-1CD5-49AB-A76E-AD55EE44262E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B24719-1CD5-49AB-A76E-AD55EE44262E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B24719-1CD5-49AB-A76E-AD55EE44262E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A8768C08-09ED-4A35-90CE-6A30168F720B} = {7D8D1AE1-8482-4FDD-B7E8-5AA9C06C3F66}
+		{42B24719-1CD5-49AB-A76E-AD55EE44262E} = {7D8D1AE1-8482-4FDD-B7E8-5AA9C06C3F66}
 	EndGlobalSection
 EndGlobal
