@@ -25,6 +25,7 @@ namespace tainicom.Aether.Animation
         internal List<Matrix> _bindPose;
         internal List<Matrix> _invBindPose; // TODO: convert those from List<T> to simple T[] arrays.
         internal List<int> _skeletonHierarchy;
+        internal Dictionary<string, int> _boneMap;
 
         private Matrix[] _boneTransforms;
         private Matrix[] _worldTransforms;
@@ -53,11 +54,12 @@ namespace tainicom.Aether.Animation
         public Matrix[] AnimationTransforms { get { return _animationTransforms; } }
 
 
-        internal Animations(List<Matrix> bindPose, List<Matrix> invBindPose, List<int> skeletonHierarchy, Dictionary<string, Clip> clips)
+        internal Animations(List<Matrix> bindPose, List<Matrix> invBindPose, List<int> skeletonHierarchy, Dictionary<string, int> boneMap, Dictionary<string, Clip> clips)
         {
             _bindPose = bindPose;
             _invBindPose = invBindPose;
             _skeletonHierarchy = skeletonHierarchy;
+            _boneMap = boneMap;
             Clips = clips;
             
             // initialize
@@ -85,6 +87,14 @@ namespace tainicom.Aether.Animation
             _bindPose.CopyTo(_boneTransforms, 0);
         }
         
+        public int GetBoneIndex(string boneName)
+        {
+            int boneIndex;
+            if (!_boneMap.TryGetValue(boneName, out boneIndex))
+                boneIndex = -1;
+            return boneIndex;
+        }
+
         public void Update(TimeSpan time, bool relativeToCurrentTime, Matrix rootTransform)
         {
             UpdateBoneTransforms(time, relativeToCurrentTime);

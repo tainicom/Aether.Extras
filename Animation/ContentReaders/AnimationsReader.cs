@@ -33,7 +33,8 @@ namespace tainicom.Aether.Animation.Content
                 List<Matrix> bindPose = ReadBindPose(input, null);
                 List<Matrix> invBindPose = ReadInvBindPose(input, null);
                 List<int> skeletonHierarchy = ReadSkeletonHierarchy(input, null);
-                animations = new Animations(bindPose, invBindPose, skeletonHierarchy, clips);
+                Dictionary<string, int> boneMap = ReadBoneMap(input, null);
+                animations = new Animations(bindPose, invBindPose, skeletonHierarchy, boneMap, clips);
             }
             else
             {
@@ -41,6 +42,7 @@ namespace tainicom.Aether.Animation.Content
                 ReadBindPose(input, animations._bindPose);
                 ReadInvBindPose(input, animations._invBindPose);
                 ReadSkeletonHierarchy(input, animations._skeletonHierarchy);
+                ReadBoneMap(input, animations._boneMap);
             }
 
             return animations;
@@ -125,6 +127,26 @@ namespace tainicom.Aether.Animation.Content
             }
 
             return skeletonHierarchy;
+        }
+
+        private Dictionary<string, int> ReadBoneMap(ContentReader input, Dictionary<string, int> existingInstance)
+        {
+            Dictionary<string, int> boneMap = existingInstance;
+
+            int count = input.ReadInt32();
+            if (boneMap == null)
+                boneMap = new Dictionary<string, int>(count);
+
+            for (int boneIndex = 0; boneIndex < count; boneIndex++)
+            {
+                string key = input.ReadString();
+                if (existingInstance == null)
+                    boneMap.Add(key, boneIndex);
+                else
+                    boneMap[key] = boneIndex;
+            }
+
+            return boneMap;
         }
         
     }

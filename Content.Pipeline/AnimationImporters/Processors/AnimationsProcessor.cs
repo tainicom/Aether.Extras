@@ -90,19 +90,21 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             List<Matrix> bindPose = new List<Matrix>();
             List<Matrix> invBindPose = new List<Matrix>();
             List<int> skeletonHierarchy = new List<int>();
+            List<string> boneNames = new List<string>();
 
-            foreach (BoneContent bone in bones)
+            foreach(var bone in bones)
             {
                 bindPose.Add(bone.Transform);
                 invBindPose.Add(Matrix.Invert(bone.AbsoluteTransform));
                 skeletonHierarchy.Add(bones.IndexOf(bone.Parent as BoneContent));
+                boneNames.Add(bone.Name);
             }
 
             // Convert animation data to our runtime format.
             Dictionary<string, ClipContent> clips;
             clips = ProcessAnimations(input, context, skeleton.Animations, bones, GenerateKeyframesFrequency);
 
-            return new AnimationsContent(bindPose, invBindPose, skeletonHierarchy, clips);
+            return new AnimationsContent(bindPose, invBindPose, skeletonHierarchy, boneNames, clips);
         }
         
         /// <summary>

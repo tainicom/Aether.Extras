@@ -31,6 +31,7 @@ namespace tainicom.Aether.Content.Pipeline.Serialization
             WriteBindPose(output, value.BindPose);
             WriteInvBindPose(output, value.InvBindPose);
             WriteSkeletonHierarchy(output, value.SkeletonHierarchy);
+            WriteBoneNames(output, value.BoneNames);
         }
 
         private void WriteClips(ContentWriter output, Dictionary<string, ClipContent> clips)
@@ -80,6 +81,20 @@ namespace tainicom.Aether.Content.Pipeline.Serialization
             return;
         }
     
+        private void WriteBoneNames(ContentWriter output, List<string> boneNames)
+        {
+            Int32 count = boneNames.Count;
+            output.Write((Int32)count);
+            
+            for (int boneIndex = 0; boneIndex < count; boneIndex++)
+            {
+                var boneName = boneNames[boneIndex];
+                output.Write(boneName);
+            }
+
+            return;
+        }
+
         public override string GetRuntimeType(TargetPlatform targetPlatform)
         {
             return "tainicom.Aether.Animation.Animations, Aether.Animation";
