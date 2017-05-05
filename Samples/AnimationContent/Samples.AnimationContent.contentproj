@@ -51,6 +51,13 @@
       <Name>GraphicsImporters.WINDOWS.XNA</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dude\dude_GPU.fbx">
+      <Name>dude_GPU</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>GpuAnimatedModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
