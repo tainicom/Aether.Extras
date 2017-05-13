@@ -1,0 +1,65 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\..\bin\Debug\Windows\Aether.Content.Pipeline.AtlasImporter.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
+
+#begin atlasMipmap.tmx
+/importer:AtlasImporter
+/processor:AtlasProcessor
+/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
+/processorParam:MipmapsPerSprite=False
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=False
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:atlasMipmap.tmx
+
+#begin atlasMipmapPerSprite.tmx
+/importer:AtlasImporter
+/processor:AtlasProcessor
+/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
+/processorParam:MipmapsPerSprite=True
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=False
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:atlasMipmapPerSprite.tmx
+
+#begin atlasNoMipmap.tmx
+/importer:AtlasImporter
+/processor:AtlasProcessor
+/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
+/processorParam:MipmapsPerSprite=False
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=False
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:atlasNoMipmap.tmx
+

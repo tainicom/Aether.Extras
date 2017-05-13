@@ -11,6 +11,7 @@ MonoGame Content Importers, Shaders, etc
 * 'RawModelProcessor' - Import 3D Models with a raw copy of Vertex/Index data for platforms that don't support GetData().
 * 'DynamicModel' - Base Processor to customize the build in Model. It allows to modify
 VertexBuffer & IndexBuffers, make them Dynamic and WriteOnly.
+* 'AtlasImporter' - Import sprite atlas. Supports .tmx files. Mipmaps are generated individually for each sprite, no color-leak.
 
 ## tainicom.Aether.Animation
 
