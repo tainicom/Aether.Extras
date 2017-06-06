@@ -91,6 +91,10 @@
       <Project>{838D803F-F140-4763-A378-56DC27EDD5F3}</Project>
       <Name>Aether.Graphics.WINDOWS.XNA</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shaders\InfiniteGrid\Aether.Shaders.InfiniteGrid.WINDOWS.XNA.csproj">
+      <Project>{908EC8FF-B0ED-478A-B486-702E578AF64A}</Project>
+      <Name>Aether.Shaders.InfiniteGrid.WINDOWS.XNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AnimationContent\Samples.AnimationContent.contentproj">
       <Name>Samples.AnimationContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
