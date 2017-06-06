@@ -68,6 +68,10 @@
       <Project>{f08d6d4c-60fb-4543-8d81-594080eb8051}</Project>
       <Name>Aether.Animation.WINDOWS.MG</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shaders\InfiniteGrid\Aether.Shaders.InfiniteGrid.WINDOWS.MG.csproj">
+      <Project>{08296a2e-becf-4db9-a518-8a613d07b80e}</Project>
+      <Name>Aether.Shaders.InfiniteGrid.WINDOWS.MG</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using tainicom.Aether.Animation;
+using tainicom.Aether.Shaders.Components;
 
 namespace Samples.Animation
 {
@@ -19,6 +20,8 @@ namespace Samples.Animation
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        InfiniteGridComponent grid;
+
         Model _model_CPU;
         Model _model_GPU;
         Animations _animations;
@@ -41,7 +44,10 @@ namespace Samples.Animation
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
-            
+
+            grid = new InfiniteGridComponent(GraphicsDevice, Content);
+            grid.Initialize();
+                        
             _model_CPU = Content.Load<Model>("Dude/dude");
             _model_GPU = Content.Load<Model>("Dude/dude_GPU");
 
@@ -93,7 +99,21 @@ namespace Samples.Animation
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            
+
+            float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
+            Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f), aspectRatio, 0.01f, 500.0f);
+            Matrix view = Matrix.CreateLookAt(
+                new Vector3(0.0f, 35.0f, -Zoom),
+                new Vector3(0.0f, 35.0f, 0), 
+                Vector3.Up);
+
+            // Draw Grid
+            grid.Projection = projection;
+            grid.View = view;
+            //grid.EditMatrix = Matrix.Identity; // XY plane
+            grid.EditMatrix = Matrix.CreateFromAxisAngle(Vector3.UnitX, MathHelper.ToRadians(-90)); // XZ plane
+            grid.Draw(gameTime);
+
             GraphicsDevice.BlendState = BlendState.Opaque;
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
@@ -105,14 +125,8 @@ namespace Samples.Animation
             else if (drawMode == DrawMode.GPU)
                 m = _model_GPU;
 
-            float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
             Matrix[] transforms = new Matrix[m.Bones.Count];
             m.CopyAbsoluteBoneTransformsTo(transforms);
-            Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f), aspectRatio, 0.01f, 500.0f);
-            Matrix view = Matrix.CreateLookAt(
-                new Vector3(0.0f, 35.0f, -Zoom),
-                new Vector3(0.0f, 35.0f, 0), 
-                Vector3.Up);
 
             sw.Reset();
             sw.Start();
