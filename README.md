@@ -23,3 +23,4 @@ CPU animation is optimized using unsafe code, writing directly to mapped VertexB
 
 * 'FXAA' - MonoGame port of NVIDIA's FXAA 3.11 shader.
 * 'Deferred' - Deferred rendering.
+* 'InfiniteGrid' - Draws an Infinite Grid.
