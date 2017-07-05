@@ -39,6 +39,7 @@ namespace tainicom.Aether.Shaders.Components
         public Matrix Projection;
         public Matrix View;
         public Matrix EditMatrix;
+        public Color Color = Color.FromNonPremultiplied(255, 163, 0, 255);
 
         public InfiniteGridComponent(GraphicsDevice graphicsDevice, ContentManager content)
         {
@@ -87,6 +88,7 @@ namespace tainicom.Aether.Shaders.Components
             this.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
 
             this._gridEffect.SetDefaultParameters(GraphicsDevice.Viewport, this.Projection, this.View, this.EditMatrix);
+            this._gridEffect.DiffuseColor = this.Color.ToVector4();
             
             this.GraphicsDevice.SetVertexBuffer(_quadVertexBuffer);
             this.GraphicsDevice.Indices = _quadIndexBuffer;
