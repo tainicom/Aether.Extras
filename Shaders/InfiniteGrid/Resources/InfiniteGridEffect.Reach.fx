@@ -52,21 +52,22 @@ struct VertexShaderOutput
 
 VertexShaderOutput MainVS(in VertexShaderInput input)
 {
-	VertexShaderOutput output = (VertexShaderOutput)0;
+    VertexShaderOutput output = (VertexShaderOutput) 0;
+    float epsilon = 0.0001f;
 
     output.Position = mul(input.Position, WorldViewProjection);
 
     float4 clipPosA = float4(input.Position.xy, -0.5, 1);
     float4 viewPosA = mul(clipPosA, InvProjection);
-    float sclA = (((clipPosA.x * InvProjection._14) + (clipPosA.y * InvProjection._24)) + (-0.5f * InvProjection._34)) + InvProjection._44;
+    float sclA = (((clipPosA.x * InvProjection._14) + (clipPosA.y * InvProjection._24)) + (clipPosA.z * InvProjection._34)) + InvProjection._44;
     viewPosA = viewPosA / sclA;
     float4 worldPosA = mul(viewPosA, InvView);
     float4 planePosA = mul(worldPosA, InvPlaneMatrix);
     output.PlanePosA = planePosA.xyz;
     
-    float4 clipPosB = float4(input.Position.xy, 0.5, 1);
+    float4 clipPosB = float4(input.Position.xy, (1.0 - epsilon), 1);
     float4 viewPosB = mul(clipPosB, InvProjection);
-    float sclB = (((clipPosB.x * InvProjection._14) + (clipPosB.y * InvProjection._24)) + (0.5f * InvProjection._34)) + InvProjection._44;
+    float sclB = (((clipPosB.x * InvProjection._14) + (clipPosB.y * InvProjection._24)) + (clipPosB.z * InvProjection._34)) + InvProjection._44;
     viewPosB = viewPosB / sclB;
     float4 worldPosB = mul(viewPosB, InvView);
     float4 planePosB = mul(worldPosB, InvPlaneMatrix);
@@ -74,15 +75,15 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 
     float4 clipPosA2 = float4(input.Position.xy + TexelSize, -0.5, 1);
     float4 viewPosA2 = mul(clipPosA2, InvProjection);
-    float sclA2 = (((clipPosA2.x * InvProjection._14) + (clipPosA2.y * InvProjection._24)) + (-0.5f * InvProjection._34)) + InvProjection._44;
+    float sclA2 = (((clipPosA2.x * InvProjection._14) + (clipPosA2.y * InvProjection._24)) + (clipPosA2.z * InvProjection._34)) + InvProjection._44;
     viewPosA2 = viewPosA2 / sclA2;
     float4 worldPosA2 = mul(viewPosA2, InvView);
     float4 planePosA2 = mul(worldPosA2, InvPlaneMatrix);
     output.PlanePosA2 = planePosA2.xyz;
 
-    float4 clipPosB2 = float4(input.Position.xy + TexelSize, 0.5, 1);
+    float4 clipPosB2 = float4(input.Position.xy + TexelSize, (1.0 - epsilon), 1);
     float4 viewPosB2 = mul(clipPosB2, InvProjection);
-    float sclB2 = (((viewPosB2.x * InvProjection._14) + (viewPosB2.y * InvProjection._24)) + (0.5f * InvProjection._34)) + InvProjection._44;
+    float sclB2 = (((viewPosB2.x * InvProjection._14) + (viewPosB2.y * InvProjection._24)) + (clipPosB2.z * InvProjection._34)) + InvProjection._44;
     viewPosB2 = viewPosB2 / sclB2;
     float4 worldPosB2 = mul(viewPosB2, InvView);
     float4 planePosB2 = mul(worldPosB2, InvPlaneMatrix);

@@ -49,21 +49,22 @@ struct VertexShaderOutput
 
 VertexShaderOutput MainVS(in VertexShaderInput input)
 {
-	VertexShaderOutput output = (VertexShaderOutput)0;
+    VertexShaderOutput output = (VertexShaderOutput) 0;
+    float epsilon = 0.0001f;
 
     output.Position = mul(input.Position, WorldViewProjection);
     
     float4 clipPosA = float4(input.Position.xy, -0.5, 1);
     float4 viewPosA = mul(clipPosA, InvProjection);
-    float sclA = (((clipPosA.x * InvProjection._14) + (clipPosA.y * InvProjection._24)) + (-0.5f * InvProjection._34)) + InvProjection._44;
+    float sclA = (((clipPosA.x * InvProjection._14) + (clipPosA.y * InvProjection._24)) + (clipPosA.z * InvProjection._34)) + InvProjection._44;
     viewPosA = viewPosA / sclA;
     float4 worldPosA = mul(viewPosA, InvView);
     float4 planePosA = mul(worldPosA, InvPlaneMatrix);
     output.PlanePosA = planePosA.xyz;
-    
-    float4 clipPosB = float4(input.Position.xy, 0.5, 1);
+
+    float4 clipPosB = float4(input.Position.xy, (1.0 - epsilon), 1);
     float4 viewPosB = mul(clipPosB, InvProjection);
-    float sclB = (((clipPosB.x * InvProjection._14) + (clipPosB.y * InvProjection._24)) + (0.5f * InvProjection._34)) + InvProjection._44;
+    float sclB = (((clipPosB.x * InvProjection._14) + (clipPosB.y * InvProjection._24)) + (clipPosB.z * InvProjection._34)) + InvProjection._44;
     viewPosB = viewPosB / sclB;
     float4 worldPosB = mul(viewPosB, InvView);
     float4 planePosB = mul(worldPosB, InvPlaneMatrix);
