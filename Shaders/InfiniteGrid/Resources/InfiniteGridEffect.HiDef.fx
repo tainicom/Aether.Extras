@@ -130,6 +130,12 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float specular2 = GridPS(pos, ilogfw, 10 + (1 - logfwfrac)) * (1 - logfwfrac);
     float specular = max(specular1, specular2);
     
+    // fade the horizon
+    float fog = dot(float3(0, 0, -1), normalize(input.PlanePosB - input.PlanePosA)); // dot(plane,ray) 
+    fog = abs(fog);
+    fog = min(fog * 16, 1); // amplify
+    specular = specular * fog;
+
     return DiffuseColor * specular;
 }
 

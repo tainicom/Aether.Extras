@@ -158,6 +158,12 @@ float4 HMainAPS(VertexShaderOutput input) : COLOR
     
     float specular = HLinesPS(q.x, ilogfw, 10 + (1 - logfwfrac)) * (1 - logfwfrac);
     
+    // fade the horizon
+    float fog = dot(float3(0, 0, -1), normalize(input.PlanePosB - input.PlanePosA)); // dot(plane,ray) 
+    fog = abs(fog);
+    fog = min(fog * 16, 1); // amplify
+    specular = specular * fog;
+
     return DiffuseColor * specular;
 }
 
@@ -177,7 +183,13 @@ float4 VMainAPS(VertexShaderOutput input) : COLOR
     float ilogfw = logfw - logfwfrac;
     
     float specular = VLinesPS(q.y, ilogfw, 10 + (1 - logfwfrac)) * (1 - logfwfrac);
-    
+
+    // fade the horizon
+    float fog = dot(float3(0, 0, -1), normalize(input.PlanePosB - input.PlanePosA)); // dot(plane,ray) 
+    fog = abs(fog);
+    fog = min(fog * 16, 1); // amplify
+    specular = specular * fog;
+
     return DiffuseColor * specular;
 }
 
@@ -198,6 +210,12 @@ float4 HMainBPS(VertexShaderOutput input) : COLOR
     
     float specular = HLinesPS(q.x, ilogfw+1, 10 + 90 * (1 - logfwfrac));
     
+    // fade the horizon
+    float fog = dot(float3(0, 0, -1), normalize(input.PlanePosB - input.PlanePosA)); // dot(plane,ray) 
+    fog = abs(fog);
+    fog = min(fog * 16, 1); // amplify
+    specular = specular * fog;
+
     return DiffuseColor * specular;
 }
 
@@ -211,13 +229,20 @@ float4 VMainBPS(VertexShaderOutput input) : COLOR
 	if(fw2.x == 0 && fw2.y ==0)
         return float4(0, 0, 0, 0);
     float fw = abs(fw2.y);
-
+    
+    // fade the horizon
     float logfw = log10(fw) + 2;
     float logfwfrac = frac(logfw);
     float ilogfw = logfw - logfwfrac;
     
     float specular = VLinesPS(q.y, ilogfw+1, 10 + 90 * (1 - logfwfrac));
     
+    // fade the horizon
+    float fog = dot(float3(0, 0, -1), normalize(input.PlanePosB - input.PlanePosA)); // dot(plane,ray) 
+    fog = abs(fog);
+    fog = min(fog * 16, 1); // amplify
+    specular = specular * fog;
+
     return DiffuseColor * specular;
 }
 
