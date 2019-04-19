@@ -22,9 +22,9 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
-#begin atlasMipmap.tmx
-/importer:AtlasImporter
-/processor:AtlasProcessor
+#begin tilemapMipmap.tmx
+/importer:TilemapImporter
+/processor:TilemapProcessor
 /processorParam:MipmapsPerSprite=False
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False
@@ -33,11 +33,11 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:atlasMipmap.tmx
+/build:tilemapMipmap.tmx
 
-#begin atlasMipmapPerSprite.tmx
-/importer:AtlasImporter
-/processor:AtlasProcessor
+#begin tilemapMipmapPerSprite.tmx
+/importer:TilemapImporter
+/processor:TilemapProcessor
 /processorParam:MipmapsPerSprite=True
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False
@@ -46,11 +46,11 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:atlasMipmapPerSprite.tmx
+/build:tilemapMipmapPerSprite.tmx
 
-#begin atlasNoMipmap.tmx
-/importer:AtlasImporter
-/processor:AtlasProcessor
+#begin tilemapNoMipmap.tmx
+/importer:TilemapImporter
+/processor:TilemapProcessor
 /processorParam:MipmapsPerSprite=False
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False
@@ -59,5 +59,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:atlasNoMipmap.tmx
+/build:tilemapNoMipmap.tmx
 
