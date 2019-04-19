@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationImporters.PORTABLE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Atlas.PORTABLE", "Atlas\Aether.Atlas.PORTABLE.csproj", "{E5907795-BC19-4CAA-9909-9F7145E1BB0D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Shaders", "Aether.Shaders", "{0193DE8C-8B7A-43F6-A30B-E65EC387B2C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Shaders.Tilemap.PORTABLE", "Shaders\Tilemap\Aether.Shaders.Tilemap.PORTABLE.csproj", "{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{E5907795-BC19-4CAA-9909-9F7145E1BB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5907795-BC19-4CAA-9909-9F7145E1BB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5907795-BC19-4CAA-9909-9F7145E1BB0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +63,9 @@ Global
 		{C3218A39-5491-44BF-B820-754832E318DB} = {717F89BC-8423-4E7C-A834-460CFD62B1E3}
 		{0A079394-D331-433A-94DF-AA25B6522279} = {717F89BC-8423-4E7C-A834-460CFD62B1E3}
 		{962D579A-91F7-4FAB-940A-423E04B8465E} = {717F89BC-8423-4E7C-A834-460CFD62B1E3}
+		{CA1564C9-D4A6-4454-A6B6-7B4E907DF8C0} = {0193DE8C-8B7A-43F6-A30B-E65EC387B2C4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC734668-3E0E-4826-90C3-55064F0473DB}
 	EndGlobalSection
 EndGlobal
