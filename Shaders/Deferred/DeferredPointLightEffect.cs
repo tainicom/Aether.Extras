@@ -67,16 +67,23 @@ namespace tainicom.Aether.Shaders
         internal static Stream LoadEffectResourceStream(string name)
         {
             // Detect MG version            
+            var version = "";
+#if !XNA
+            version = ".8";
             var mgVersion = GetAssembly(typeof(Effect)).GetName().Version;
             if (mgVersion.Major == 3)
             {
                 if (mgVersion.Minor == 4)
-                    name += ".6";
+                    version = ".6";
                 if (mgVersion.Minor == 5)
-                    name += ".7";
+                    version = ".7";
                 if (mgVersion.Minor == 6)
-                    name += ".8";
+                    version = ".8";
+                if (mgVersion.Minor == 7)
+                    version = ".8";
             }
+            name = name + version;
+#endif
 
             Stream stream = GetAssembly(typeof(DeferredPointLightEffect)).GetManifestResourceStream(name);
             return stream;
