@@ -122,7 +122,18 @@ namespace tainicom.Aether.Content.Pipeline
                 }
             }
             
-            base.Process(output, context);
+            // Workaround MonoGame TextureProcessor bug.
+            // MonoGame TextureProcessor overwrites existing mipmaps.
+            if (MipmapsPerSprite && GenerateMipmaps)
+            {
+                GenerateMipmaps = false;
+                base.Process(output, context);
+                GenerateMipmaps = true;
+            }
+            else
+            {
+                base.Process(output, context);
+            }
             
             return output;
         }
