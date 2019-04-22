@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016 Kastellanos Nikolaos
+//   Copyright 2016-2019 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace tainicom.Aether.Content.Pipeline
         
 
         [DefaultValue(true)]
-        public new bool MipmapsPerSprite
+        public bool MipmapsPerSprite
         {
             get { return _mipmapsPerSprite; }
             set { _mipmapsPerSprite = value; }

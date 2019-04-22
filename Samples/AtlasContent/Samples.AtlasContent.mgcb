@@ -24,7 +24,6 @@
 #begin atlasMipmap.tmx
 /importer:AtlasImporter
 /processor:AtlasProcessor
-/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
 /processorParam:MipmapsPerSprite=False
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False
@@ -38,7 +37,6 @@
 #begin atlasMipmapPerSprite.tmx
 /importer:AtlasImporter
 /processor:AtlasProcessor
-/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
 /processorParam:MipmapsPerSprite=True
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False
@@ -52,7 +50,6 @@
 #begin atlasNoMipmap.tmx
 /importer:AtlasImporter
 /processor:AtlasProcessor
-/processorParam:Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType=tainicom.Aether.Content.Pipeline.Atlas.AtlasContent
 /processorParam:MipmapsPerSprite=False
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=False

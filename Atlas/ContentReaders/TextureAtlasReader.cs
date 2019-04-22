@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016 Kastellanos Nikolaos
+//   Copyright 2016-2019 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -26,8 +26,6 @@ namespace tainicom.Aether.Graphics.Content
     {
         protected override TextureAtlas Read(ContentReader input, TextureAtlas existingInstance)
         {
-            System.Diagnostics.Debugger.Launch();
-
             IGraphicsDeviceService graphicsDeviceService = (IGraphicsDeviceService)input.ContentManager.ServiceProvider.GetService(typeof(IGraphicsDeviceService));
             var device = graphicsDeviceService.GraphicsDevice;
 
