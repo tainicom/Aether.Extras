@@ -22,21 +22,49 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
-#begin Dude/dude.xnb
-/copy:Dude/dude.xnb
+#begin Dude/dude.fbx
+/importer:FbxImporter
+/processor:CpuAnimatedModelProcessor
+/processorParam:VertexBufferType=DynamicWriteOnly
+/processorParam:IndexBufferType=Default
+/processorParam:MaxBones=72
+/processorParam:GenerateKeyframesFrequency=30
+/processorParam:FixRealBoneRoot=False
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Dude/dude.fbx
 
-#begin Dude/dude_GPU.xnb
-/copy:Dude/dude_GPU.xnb
-
-#begin Dude/head_0.xnb
-/copy:Dude/head_0.xnb
-
-#begin Dude/jacket_0.xnb
-/copy:Dude/jacket_0.xnb
-
-#begin Dude/pants_0.xnb
-/copy:Dude/pants_0.xnb
-
-#begin Dude/upBodyC_0.xnb
-/copy:Dude/upBodyC_0.xnb
+#begin Dude/dude_GPU.fbx
+/importer:FbxImporter
+/processor:GpuAnimatedModelProcessor
+/processorParam:MaxBones=72
+/processorParam:GenerateKeyframesFrequency=30
+/processorParam:FixRealBoneRoot=False
+/processorParam:DefaultEffect=SkinnedEffect
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Dude/dude_GPU.fbx
 

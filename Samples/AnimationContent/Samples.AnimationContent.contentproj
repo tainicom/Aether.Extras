@@ -30,11 +30,18 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dude\dude.fbx">
+    <Compile Include="Dude\dude.Original.fbx">
       <Name>dude</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CpuAnimatedModelProcessor</Processor>
     </Compile>
+    <Compile Include="Dude\dude_GPU.Original.fbx">
+      <Name>dude_GPU</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>GpuAnimatedModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="font.spritefont">
       <Name>font</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -50,13 +57,6 @@
       <Project>{565ACF47-7E36-435E-8727-2AFB39E61134}</Project>
       <Name>GraphicsImporters.WINDOWS.XNA</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Dude\dude_GPU.fbx">
-      <Name>dude_GPU</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>GpuAnimatedModelProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
