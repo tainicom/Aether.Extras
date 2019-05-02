@@ -361,9 +361,12 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             List<KeyframeContent> newKeyframes = new List<KeyframeContent>();
             for (int b = 0; b < boneFrames.Length; b++)
             {
-                for (int k = 0; k < boneFrames[b].Count; ++k)
+                if (boneFrames[b] != null)
                 {
-                    newKeyframes.Add(boneFrames[b][k]);
+                    for (int k = 0; k < boneFrames[b].Count; ++k)
+                    {
+                        newKeyframes.Add(boneFrames[b][k]);
+                    }
                 }
             }
             newKeyframes.Sort(CompareKeyframeTimes);
