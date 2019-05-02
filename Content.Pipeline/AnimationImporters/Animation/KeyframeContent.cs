@@ -31,5 +31,11 @@ namespace tainicom.Aether.Content.Pipeline.Animation
             this.Time = time;
             this.Transform = transform;
         }	
+
+        public override string ToString()
+        {
+            return string.Format("{{Time:{0} Bone:{1}}}",
+                new object[] { Time, Bone });
+        }
     }
 }

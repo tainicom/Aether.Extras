@@ -49,6 +49,12 @@ namespace tainicom.Aether.Animation
             this._bone = bone;
             this._time = time;
             this._transform = transform;
-        }	
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{{Time:{0} Bone:{1}}}",
+                new object[] { Time, Bone });
+        }
     }
 }
