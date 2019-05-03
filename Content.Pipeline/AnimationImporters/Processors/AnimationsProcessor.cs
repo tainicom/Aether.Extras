@@ -363,11 +363,8 @@ namespace tainicom.Aether.Content.Pipeline.Processors
 
                 var diffA = keyframeA.Time;
                 var diffB = duration - keyframeB.Time;
-                var diff = diffA + diffB;
-
-                float w1 = ((float)diffB.Ticks / diff.Ticks);
-                float w2 = ((float)diffA.Ticks / diff.Ticks);
-                BlendMatrix(ref keyframeA.Transform, w1, ref keyframeB.Transform, w2, ref mBlend);
+                float lerpAmount = (float)diffA.Ticks / (float)(diffA + diffB).Ticks;
+                MatrixLerpDecomposition(ref keyframeA.Transform, ref keyframeB.Transform, lerpAmount, ref mBlend);
 
                 if (keyframeA.Time != TimeSpan.Zero)
                 {
@@ -406,22 +403,6 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             newKeyframes.Sort(CompareKeyframeTimes);
 
             return newKeyframes;
-        }
-
-        private static void BlendMatrix(ref Matrix m1, float w1, ref Matrix m2, float w2, ref Matrix result)
-        {
-            result.M11 = (m1.M11 * w1) + (m2.M11 * w2);
-            result.M12 = (m1.M12 * w1) + (m2.M12 * w2);
-            result.M13 = (m1.M13 * w1) + (m2.M13 * w2);
-            result.M21 = (m1.M21 * w1) + (m2.M21 * w2);
-            result.M22 = (m1.M22 * w1) + (m2.M22 * w2);
-            result.M23 = (m1.M23 * w1) + (m2.M23 * w2);
-            result.M31 = (m1.M31 * w1) + (m2.M31 * w2);
-            result.M32 = (m1.M32 * w1) + (m2.M32 * w2);
-            result.M33 = (m1.M33 * w1) + (m2.M33 * w2);
-            result.M41 = (m1.M41 * w1) + (m2.M41 * w2);
-            result.M42 = (m1.M42 * w1) + (m2.M42 * w2);
-            result.M43 = (m1.M43 * w1) + (m2.M43 * w2);
         }
 
         // the player currently requires all bones to have a keyframe at time zero
@@ -508,49 +489,68 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             int a = i;
             int b = i + 1;
             var diff = frames[b].Time - frames[a].Time;
+            Matrix mBlend = Matrix.Identity;
             if (diff > keySpan)
             {
                 TimeSpan newTime = frames[a].Time + keySpan;
                 float amount = (float)(keySpan.TotalSeconds / diff.TotalSeconds);
+                Matrix m1 = frames[a].Transform;
+                Matrix m2 = frames[b].Transform;
 
-                Vector3 pScale; Quaternion pRotation; Vector3 pTranslation;
-                frames[a].Transform.Decompose(out pScale, out pRotation, out pTranslation);
+                MatrixLerpDecomposition(ref m1, ref m2, amount, ref mBlend);
 
-                Vector3 iScale; Quaternion iRotation; Vector3 iTranslation;
-                frames[b].Transform.Decompose(out iScale, out iRotation, out iTranslation);
-
-                Vector3 Scale; Quaternion Rotation; Vector3 Translation;
-                //lerp
-                Vector3.Lerp(ref pScale, ref iScale, amount, out Scale);
-                Quaternion.Lerp(ref pRotation, ref iRotation, amount, out Rotation);
-                Vector3.Lerp(ref pTranslation, ref iTranslation, amount, out Translation);
-
-                Matrix rotation;
-                Matrix.CreateFromQuaternion(ref Rotation, out rotation);
-
-                Matrix newMatrix = new Matrix
-                {
-                    M11 = Scale.X * rotation.M11,
-                    M12 = Scale.X * rotation.M12,
-                    M13 = Scale.X * rotation.M13,
-                    M14 = 0,
-                    M21 = Scale.Y * rotation.M21,
-                    M22 = Scale.Y * rotation.M22,
-                    M23 = Scale.Y * rotation.M23,
-                    M24 = 0,
-                    M31 = Scale.Z * rotation.M31,
-                    M32 = Scale.Z * rotation.M32,
-                    M33 = Scale.Z * rotation.M33,
-                    M34 = 0,
-                    M41 = Translation.X,
-                    M42 = Translation.Y,
-                    M43 = Translation.Z,
-                    M44 = 1
-                };
-
-                frames.Insert(b, new KeyframeContent(bone, newTime, newMatrix));
+                frames.Insert(b, new KeyframeContent(bone, newTime, mBlend));
             }
             return;
+        }
+
+        private static void MatrixLerpPrecise(ref Matrix m1, ref Matrix m2, float amount, ref Matrix result)
+        {
+            float w1 = 1f - amount;
+            float w2 = amount;
+            result.M11 = (m1.M11 * w1) + (m2.M11 * w2);
+            result.M12 = (m1.M12 * w1) + (m2.M12 * w2);
+            result.M13 = (m1.M13 * w1) + (m2.M13 * w2);
+            result.M21 = (m1.M21 * w1) + (m2.M21 * w2);
+            result.M22 = (m1.M22 * w1) + (m2.M22 * w2);
+            result.M23 = (m1.M23 * w1) + (m2.M23 * w2);
+            result.M31 = (m1.M31 * w1) + (m2.M31 * w2);
+            result.M32 = (m1.M32 * w1) + (m2.M32 * w2);
+            result.M33 = (m1.M33 * w1) + (m2.M33 * w2);
+            result.M41 = (m1.M41 * w1) + (m2.M41 * w2);
+            result.M42 = (m1.M42 * w1) + (m2.M42 * w2);
+            result.M43 = (m1.M43 * w1) + (m2.M43 * w2);
+        }
+
+        private static void MatrixLerpDecomposition(ref Matrix m1, ref Matrix m2, float amount, ref Matrix mBlend)
+        {
+            Vector3 pScale; Quaternion pRotation; Vector3 pTranslation;
+            m1.Decompose(out pScale, out pRotation, out pTranslation);
+
+            Vector3 iScale; Quaternion iRotation; Vector3 iTranslation;
+            m2.Decompose(out iScale, out iRotation, out iTranslation);
+
+            Vector3 Scale; Quaternion Rotation; Vector3 Translation;
+            //lerp
+            Vector3.Lerp(ref pScale, ref iScale, amount, out Scale);
+            Quaternion.Slerp(ref pRotation, ref iRotation, amount, out Rotation);
+            Vector3.Lerp(ref pTranslation, ref iTranslation, amount, out Translation);
+
+            Matrix rotation;
+            Matrix.CreateFromQuaternion(ref Rotation, out rotation);
+
+            mBlend.M11 = Scale.X * rotation.M11;
+            mBlend.M12 = Scale.X * rotation.M12;
+            mBlend.M13 = Scale.X * rotation.M13;
+            mBlend.M21 = Scale.Y * rotation.M21;
+            mBlend.M22 = Scale.Y * rotation.M22;
+            mBlend.M23 = Scale.Y * rotation.M23;
+            mBlend.M31 = Scale.Z * rotation.M31;
+            mBlend.M32 = Scale.Z * rotation.M32;
+            mBlend.M33 = Scale.Z * rotation.M33;
+            mBlend.M41 = Translation.X;
+            mBlend.M42 = Translation.Y;
+            mBlend.M43 = Translation.Z;
         }
         
     }
