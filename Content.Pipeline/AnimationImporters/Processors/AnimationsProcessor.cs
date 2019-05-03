@@ -349,6 +349,38 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             System.Diagnostics.Debug.WriteLine("Duration: " + duration);
             System.Diagnostics.Debug.WriteLine("keyframeCount: " + keyframeCount);
 
+            // generate first and last frame
+            Matrix mBlend = Matrix.Identity;
+            for (int b = 0; b < boneFrames.Length; b++)
+            {
+                if (boneFrames[b] == null)
+                    continue;
+
+                var keyframeA = boneFrames[b][0];
+                var keyframeB = boneFrames[b][boneFrames[b].Count - 1];
+                if (keyframeA.Time == TimeSpan.Zero && keyframeB.Time == duration)
+                    continue;
+
+                var diffA = keyframeA.Time;
+                var diffB = duration - keyframeB.Time;
+                var diff = diffA + diffB;
+
+                float w1 = ((float)diffB.Ticks / diff.Ticks);
+                float w2 = ((float)diffA.Ticks / diff.Ticks);
+                BlendMatrix(ref keyframeA.Transform, w1, ref keyframeB.Transform, w2, ref mBlend);
+
+                if (keyframeA.Time != TimeSpan.Zero)
+                {
+                    var keyframe0 = new KeyframeContent(keyframeA.Bone, TimeSpan.Zero, mBlend);
+                    boneFrames[b].Insert(0, keyframe0);
+                }
+                if (keyframeB.Time != TimeSpan.Zero)
+                {
+                    var keyframeZ = new KeyframeContent(keyframeA.Bone, duration, mBlend);
+                    boneFrames[b].Add(keyframeZ);
+                }
+            }
+
             TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
             for (int b = 0; b < boneFrames.Length; b++)
             {
@@ -376,6 +408,21 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             return newKeyframes;
         }
 
+        private static void BlendMatrix(ref Matrix m1, float w1, ref Matrix m2, float w2, ref Matrix result)
+        {
+            result.M11 = (m1.M11 * w1) + (m2.M11 * w2);
+            result.M12 = (m1.M12 * w1) + (m2.M12 * w2);
+            result.M13 = (m1.M13 * w1) + (m2.M13 * w2);
+            result.M21 = (m1.M21 * w1) + (m2.M21 * w2);
+            result.M22 = (m1.M22 * w1) + (m2.M22 * w2);
+            result.M23 = (m1.M23 * w1) + (m2.M23 * w2);
+            result.M31 = (m1.M31 * w1) + (m2.M31 * w2);
+            result.M32 = (m1.M32 * w1) + (m2.M32 * w2);
+            result.M33 = (m1.M33 * w1) + (m2.M33 * w2);
+            result.M41 = (m1.M41 * w1) + (m2.M41 * w2);
+            result.M42 = (m1.M42 * w1) + (m2.M42 * w2);
+            result.M43 = (m1.M43 * w1) + (m2.M43 * w2);
+        }
 
         // the player currently requires all bones to have a keyframe at time zero
         private List<KeyframeContent> EnsureFirstKeyframeExists(TimeSpan duration, List<KeyframeContent> keyframes)
