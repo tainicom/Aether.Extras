@@ -298,6 +298,8 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             if (generateKeyframesFrequency > 0)
                 keyframes = InterpolateKeyframes(animation.Duration, keyframes, generateKeyframesFrequency);
 
+            keyframes = EnsureFirstKeyframeExists(animation.Duration, keyframes);
+
             if (keyframes.Count == 0)
                 throw new InvalidContentException("Animation has no keyframes.");
 
@@ -357,6 +359,65 @@ namespace tainicom.Aether.Content.Pipeline.Processors
 
             TimeSpan checkDuration = TimeSpan.FromSeconds((frames - 1) / generateKeyframesFrequency);
             if (duration == checkDuration) return keyframes;
+
+            List<KeyframeContent> newKeyframes = new List<KeyframeContent>();
+            for (int b = 0; b < boneFrames.Length; b++)
+            {
+                if (boneFrames[b] != null)
+                {
+                    for (int k = 0; k < boneFrames[b].Count; ++k)
+                    {
+                        newKeyframes.Add(boneFrames[b][k]);
+                    }
+                }
+            }
+            newKeyframes.Sort(CompareKeyframeTimes);
+
+            return newKeyframes;
+        }
+
+
+        // the player currently requires all bones to have a keyframe at time zero
+        private List<KeyframeContent> EnsureFirstKeyframeExists(TimeSpan duration, List<KeyframeContent> keyframes)
+        {
+            int keyframeCount = keyframes.Count;
+
+            // find bones
+            HashSet<int> bonesSet = new HashSet<int>();
+            int maxBone = 0;
+            for (int i = 0; i < keyframeCount; i++)
+            {
+                int bone = keyframes[i].Bone;
+                maxBone = Math.Max(maxBone, bone);
+                bonesSet.Add(bone);
+            }
+            int boneCount = bonesSet.Count;
+
+            // split bones 
+            List<KeyframeContent>[] boneFrames = new List<KeyframeContent>[maxBone + 1];
+            for (int i = 0; i < keyframeCount; i++)
+            {
+                int bone = keyframes[i].Bone;
+                if (boneFrames[bone] == null) boneFrames[bone] = new List<KeyframeContent>();
+                boneFrames[bone].Add(keyframes[i]);
+            }
+
+            //            
+            System.Diagnostics.Debug.WriteLine("Duration: " + duration);
+            System.Diagnostics.Debug.WriteLine("keyframeCount: " + keyframeCount);
+
+
+            for (int b = 0; b < boneFrames.Length; b++)
+            {
+                if (boneFrames[b] == null)
+                    continue;
+                                
+                if (boneFrames[b][0].Time != TimeSpan.Zero)
+                {
+                    var keyframe0 = new KeyframeContent(boneFrames[b][0].Bone, TimeSpan.Zero, boneFrames[b][0].Transform);
+                    boneFrames[b].Insert(0, keyframe0);
+                }
+            }
 
             List<KeyframeContent> newKeyframes = new List<KeyframeContent>();
             for (int b = 0; b < boneFrames.Length; b++)
