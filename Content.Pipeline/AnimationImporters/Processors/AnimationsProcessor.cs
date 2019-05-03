@@ -347,9 +347,9 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             System.Diagnostics.Debug.WriteLine("Duration: " + duration);
             System.Diagnostics.Debug.WriteLine("keyframeCount: " + keyframeCount);
 
+            TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
             for (int b = 0; b < boneFrames.Length; b++)
             {
-                TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
                 boneFrames[b] = InterpolateFramesBone(b, boneFrames[b], keySpan);
             }
 
