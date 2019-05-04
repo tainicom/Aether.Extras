@@ -325,6 +325,10 @@ namespace tainicom.Aether.Content.Pipeline.Processors
 
             int keyframeCount = keyframes.Count;
 
+            //
+            System.Diagnostics.Debug.WriteLine("Duration: " + duration);
+            System.Diagnostics.Debug.WriteLine("keyframeCount: " + keyframeCount);
+
             // find bones
             HashSet<int> bonesSet = new HashSet<int>();
             int maxBone = 0;
@@ -335,6 +339,12 @@ namespace tainicom.Aether.Content.Pipeline.Processors
                 bonesSet.Add(bone);
             }
             int boneCount = bonesSet.Count;
+   
+            // check if keyframes are allready fully interpolated
+            int frames = keyframeCount / boneCount;
+            TimeSpan checkDuration = TimeSpan.FromSeconds((frames - 1) / generateKeyframesFrequency);
+            if (duration == checkDuration) 
+                return keyframes;
 
             // split bones 
             List<KeyframeContent>[] boneFrames = new List<KeyframeContent>[maxBone + 1];
@@ -344,10 +354,6 @@ namespace tainicom.Aether.Content.Pipeline.Processors
                 if (boneFrames[bone] == null) boneFrames[bone] = new List<KeyframeContent>();
                 boneFrames[bone].Add(keyframes[i]);
             }
-
-            //            
-            System.Diagnostics.Debug.WriteLine("Duration: " + duration);
-            System.Diagnostics.Debug.WriteLine("keyframeCount: " + keyframeCount);
 
             // generate first and last frame
             Matrix mBlend = Matrix.Identity;
@@ -378,17 +384,14 @@ namespace tainicom.Aether.Content.Pipeline.Processors
                 }
             }
 
+            // Interpolate Frames for each bone
             TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
             for (int b = 0; b < boneFrames.Length; b++)
             {
                 boneFrames[b] = InterpolateFramesBone(b, boneFrames[b], keySpan);
             }
 
-            int frames = keyframeCount / boneCount;
-
-            TimeSpan checkDuration = TimeSpan.FromSeconds((frames - 1) / generateKeyframesFrequency);
-            if (duration == checkDuration) return keyframes;
-
+            // copy keyframes from boneFrames back to a flat list and order them by time
             List<KeyframeContent> newKeyframes = new List<KeyframeContent>();
             for (int b = 0; b < boneFrames.Length; b++)
             {
