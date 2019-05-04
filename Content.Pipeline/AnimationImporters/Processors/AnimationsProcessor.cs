@@ -309,7 +309,7 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             return new ClipContent(animation.Duration, keyframes.ToArray());
         }
 
-        int CompareKeyframeTimes(KeyframeContent a, KeyframeContent b)
+        static int CompareKeyframeTimes(KeyframeContent a, KeyframeContent b)
         {
             int cmpTime = a.Time.CompareTo(b.Time);
             if (cmpTime == 0)
@@ -332,10 +332,12 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             // find bones
             HashSet<int> bonesSet = new HashSet<int>();
             int maxBone = 0;
+            double maxTime = 0;
             for (int i = 0; i < keyframeCount; i++)
             {
                 int bone = keyframes[i].Bone;
                 maxBone = Math.Max(maxBone, bone);
+                maxTime = Math.Max(maxTime, keyframes[i].Time.TotalSeconds);
                 bonesSet.Add(bone);
             }
             int boneCount = bonesSet.Count;
@@ -355,40 +357,10 @@ namespace tainicom.Aether.Content.Pipeline.Processors
                 boneFrames[bone].Add(keyframes[i]);
             }
 
-            // generate first and last frame
-            Matrix mBlend = Matrix.Identity;
-            for (int b = 0; b < boneFrames.Length; b++)
-            {
-                if (boneFrames[b] == null)
-                    continue;
-
-                var keyframeA = boneFrames[b][0];
-                var keyframeB = boneFrames[b][boneFrames[b].Count - 1];
-                if (keyframeA.Time == TimeSpan.Zero && keyframeB.Time == duration)
-                    continue;
-
-                var diffA = keyframeA.Time;
-                var diffB = duration - keyframeB.Time;
-                float lerpAmount = (float)diffA.Ticks / (float)(diffA + diffB).Ticks;
-                MatrixLerpDecomposition(ref keyframeA.Transform, ref keyframeB.Transform, lerpAmount, ref mBlend);
-
-                if (keyframeA.Time != TimeSpan.Zero)
-                {
-                    var keyframe0 = new KeyframeContent(keyframeA.Bone, TimeSpan.Zero, mBlend);
-                    boneFrames[b].Insert(0, keyframe0);
-                }
-                if (keyframeB.Time != TimeSpan.Zero)
-                {
-                    var keyframeZ = new KeyframeContent(keyframeA.Bone, duration, mBlend);
-                    boneFrames[b].Add(keyframeZ);
-                }
-            }
-
             // Interpolate Frames for each bone
-            TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
             for (int b = 0; b < boneFrames.Length; b++)
             {
-                boneFrames[b] = InterpolateFramesBone(b, boneFrames[b], keySpan);
+                boneFrames[b] = InterpolateFramesBone(b, boneFrames[b], duration, generateKeyframesFrequency);
             }
 
             // copy keyframes from boneFrames back to a flat list and order them by time
@@ -466,7 +438,7 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             return newKeyframes;
         }
 
-        private static List<KeyframeContent> InterpolateFramesBone(int bone, List<KeyframeContent> frames, TimeSpan keySpan)
+        private static List<KeyframeContent> InterpolateFramesBone(int bone, List<KeyframeContent> frames, TimeSpan duration, int generateKeyframesFrequency)
         {
             System.Diagnostics.Debug.WriteLine("");
             System.Diagnostics.Debug.WriteLine("Bone: " + bone);
@@ -479,12 +451,81 @@ namespace tainicom.Aether.Content.Pipeline.Processors
             System.Diagnostics.Debug.WriteLine("MinTime: " + frames[0].Time);
             System.Diagnostics.Debug.WriteLine("MaxTime: " + frames[frames.Count - 1].Time);
 
-            for (int i = 0; i < frames.Count - 1; ++i)
+            List<KeyframeContent> newFrames = new List<KeyframeContent>();
+            
+            if (frames.Count == 1)
             {
-                InterpolateFrames(bone, frames, keySpan, i);
+                TimeSpan time = TimeSpan.Zero;
+                int frame = 0;
+                for (; time < duration; frame++)
+                {                    
+                    long timeTicks = (frame * TimeSpan.TicksPerSecond) / generateKeyframesFrequency;
+                    time = TimeSpan.FromTicks(timeTicks);                    
+                    newFrames.Add(new KeyframeContent(bone, time, frames[0].Transform));
+                }
             }
+            else
+            {
+                generateKeyframesFrequency = 60;
+                int lastKeyFrame = (frames.Count - 1);
+                int keyFrameA = lastKeyFrame;
+                int keyFrameB = 0;
+                TimeSpan timeA = frames[keyFrameA].Time - duration; // timeA is initially lower than TimeSpan.Zero 
+                TimeSpan timeB = frames[keyFrameB].Time;
+                TimeSpan diffAB = timeB - timeA;
+                Matrix mA = frames[keyFrameA].Transform;
+                Matrix mB = frames[keyFrameB].Transform;
+                Matrix mBlend = Matrix.Identity;
+                
+                TimeSpan time = TimeSpan.Zero;
+                int frame = 0;
+                for (; time < duration; frame++)
+                {
+                    long timeTicks = (frame * TimeSpan.TicksPerSecond) / generateKeyframesFrequency;
+                    time = TimeSpan.FromTicks(timeTicks);
 
-            return frames;
+                    while (time > timeB)
+                    {
+                        keyFrameA = keyFrameB;
+                        timeA = timeB;
+                        mA = mB;
+                        keyFrameB = (keyFrameB + 1) % frames.Count;
+                        timeB = frames[keyFrameB].Time;                    
+                        if (timeB < timeA)
+                            timeB += duration; // timeB is now greater than duration
+                        mB = frames[keyFrameB].Transform;
+                    
+                        diffAB = timeB - timeA;
+                    }
+
+                    // if the first keyFrame is at time zero, we skip interpolation with the prev/last keyframe.
+                    if (keyFrameB == 0 && timeB == TimeSpan.Zero)
+                    {
+                        mBlend = mB;
+                    }
+                    else
+                    {
+                        TimeSpan diffB = timeB - time;
+                        float amount = 1f - (float)((double)diffB.Ticks / (double)diffAB.Ticks);
+                        MatrixLerpDecomposition(ref mA, ref mB, amount, ref mBlend);
+                    }
+                
+                    newFrames.Add(new KeyframeContent(bone, time, mBlend));
+
+                    System.Diagnostics.Debug.WriteLine("{Time:" + time);
+                }
+            }
+                        
+            //newFrames.AddRange(frames);
+            newFrames.Sort(CompareKeyframeTimes);
+
+            //TimeSpan keySpan = TimeSpan.FromTicks((long)((1f / generateKeyframesFrequency) * TimeSpan.TicksPerSecond));
+            //for (int i = 0; i < frames.Count - 1; ++i)
+            //{
+            //    InterpolateFrames(bone, frames, keySpan, i);
+            //}
+
+            return newFrames;
         }
 
         private static void InterpolateFrames(int bone, List<KeyframeContent> frames, TimeSpan keySpan, int i)
