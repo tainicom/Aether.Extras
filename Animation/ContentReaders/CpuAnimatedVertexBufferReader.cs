@@ -51,27 +51,39 @@ namespace tainicom.Aether.Animation.Content
                         case VertexElementUsage.Position:
                             System.Diagnostics.Debug.Assert(channel.VertexElementFormat == VertexElementFormat.Vector3);
                             var pos = input.ReadVector3();
-                            cpuVertices[i].Position = pos;
-                            gpuVertices[i].Position = pos;
+                            if (channel.UsageIndex == 0)
+                            {
+                                cpuVertices[i].Position = pos;
+                                gpuVertices[i].Position = pos;
+                            }
                             break;
 
                         case VertexElementUsage.Normal:
                             System.Diagnostics.Debug.Assert(channel.VertexElementFormat == VertexElementFormat.Vector3);
                             var nor = input.ReadVector3();
-                            cpuVertices[i].Normal = nor;
-                            gpuVertices[i].Normal = nor;
+                            if (channel.UsageIndex == 0)
+                            {
+                                cpuVertices[i].Normal = nor;
+                                gpuVertices[i].Normal = nor;
+                            }
                             break;
 
                         case VertexElementUsage.TextureCoordinate:
                             System.Diagnostics.Debug.Assert(channel.VertexElementFormat == VertexElementFormat.Vector2);
                             var tex = input.ReadVector2();
-                            gpuVertices[i].TextureCoordinate = tex;
-                            break;
+                            if (channel.UsageIndex == 0)
+                            {
+                                gpuVertices[i].TextureCoordinate = tex;
+                            }
+                            break;                            
 
                         case VertexElementUsage.BlendWeight:
                             System.Diagnostics.Debug.Assert(channel.VertexElementFormat == VertexElementFormat.Vector4);
                             var wei = input.ReadVector4();
-                            cpuVertices[i].BlendWeights = wei;
+                            if (channel.UsageIndex == 0)
+                            {
+                                cpuVertices[i].BlendWeights = wei;
+                            }
                             break;
 
                         case VertexElementUsage.BlendIndices:
@@ -80,10 +92,13 @@ namespace tainicom.Aether.Animation.Content
                             var i1 = input.ReadByte();
                             var i2 = input.ReadByte();
                             var i3 = input.ReadByte();
-                            cpuVertices[i].BlendIndex0 = i0;
-                            cpuVertices[i].BlendIndex1 = i1;
-                            cpuVertices[i].BlendIndex2 = i2;
-                            cpuVertices[i].BlendIndex3 = i3;
+                            if (channel.UsageIndex == 0)
+                            {
+                                cpuVertices[i].BlendIndex0 = i0;
+                                cpuVertices[i].BlendIndex1 = i1;
+                                cpuVertices[i].BlendIndex2 = i2;
+                                cpuVertices[i].BlendIndex3 = i3;
+                            }
                             break;
 
                         default:
