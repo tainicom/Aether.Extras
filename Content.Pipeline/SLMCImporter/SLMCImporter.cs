@@ -97,6 +97,7 @@ namespace tainicom.Aether.Content.Pipeline
 
                 var imageSource = GetAttribute(imageNode, "source");
                 var fullImageSource = Path.Combine(Path.GetDirectoryName(filename), imageSource);
+                context.AddDependency(fullImageSource);
                 var textureContent = (Texture2DContent)txImporter.Import(fullImageSource, context);
                 textureContent.Name = Path.GetFileNameWithoutExtension(fullImageSource);
 
