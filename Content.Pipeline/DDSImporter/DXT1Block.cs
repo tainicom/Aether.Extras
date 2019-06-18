@@ -70,7 +70,7 @@ namespace tainicom.Aether.Content.Pipeline
                         new Color((color0.ToVector3() + color1.ToVector3()) / 2f);
                 case 3: return (color0.PackedValue > color1.PackedValue) ? 
                         new Color((2 * color1.ToVector3() + color0.ToVector3()) / 3) : 
-                        Color.TransparentBlack;
+                        Color.Transparent;
 
                 default: throw new NotSupportedException();
             }
