@@ -1,0 +1,30 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\..\bin\Debug\Windows\Aether.Content.Pipeline.SLMCImporter.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
+
+#begin b_c0123.slmc
+/importer:SLMCImporter
+/processor:SLMCProcessor
+/processorParam:TextureFormat=BGRA4444
+/processorParam:GenerateMipmaps=True
+/build:b_c0123.slmc
+
