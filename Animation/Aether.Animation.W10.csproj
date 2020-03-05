@@ -142,11 +142,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsUniversal\SharpDX.dll</HintPath>
+      <HintPath>..\packages\SharpDX.4.0.1\lib\uap10.0\SharpDX.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.Direct3D11">
-      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsUniversal\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\packages\SharpDX.Direct3D11.4.0.1\lib\uap10.0\SharpDX.Direct3D11.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\packages\SharpDX.DXGI.4.0.1\lib\uap10.0\SharpDX.DXGI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
