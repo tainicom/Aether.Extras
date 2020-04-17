@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
+MinimumVisualStudioVersion = 15.0.28307.1082
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Animation.W10", "Animation\Aether.Animation.W10.csproj", "{A312F64C-A5D4-4B28-A250-3A75CD5C4952}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aether.Shaders", "Aether.Shaders", "{2C80D730-7FC9-45A7-BBA7-052BAABF236C}"
@@ -78,5 +78,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CD84CAD7-12A5-47DA-82C9-A2953B9FFBF0} = {2C80D730-7FC9-45A7-BBA7-052BAABF236C}
 		{E3A26131-F69A-4DD1-87B9-A7E3DEE255AA} = {2C80D730-7FC9-45A7-BBA7-052BAABF236C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B093366-E165-4CF8-8C63-A21C8A2D90CE}
 	EndGlobalSection
 EndGlobal
