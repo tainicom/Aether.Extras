@@ -12,6 +12,7 @@ MonoGame Content Importers, Shaders, etc
 * 'DynamicModel' - Base Processor to customize the build in Model. It allows to modify
 VertexBuffer & IndexBuffers, make them Dynamic and WriteOnly.
 * 'AtlasImporter' - Import sprite atlas. Supports .tmx files. Mipmaps are generated individually for each sprite, no color-leak.
+* 'VoxelModelImporter' - Import .vox files as 3D Models.
 
 ## tainicom.Aether.Animation
 
