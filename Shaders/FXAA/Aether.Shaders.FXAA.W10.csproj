@@ -146,10 +146,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\packages\MonoGame.Framework.Portable.3.2.99.1-Beta\lib\portable-net40+sl40+win+wp80\MonoGame.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.2.99.1-Beta">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

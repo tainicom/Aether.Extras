@@ -32,11 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MonoGame.Framework.Portable.3.2.99.1-Beta\lib\portable-net40+sl40+win+wp80\MonoGame.Framework.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.2.99.1-Beta">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeferredBasicEffect.cs" />
@@ -49,7 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <EmbeddedResource Include="Resources\DeferredBasicEffect.dx11.mgfxo.7" />
     <EmbeddedResource Include="Resources\DeferredClearGBuffer.dx11.mgfxo.7" />
     <EmbeddedResource Include="Resources\DeferredCombine.dx11.mgfxo.7" />
