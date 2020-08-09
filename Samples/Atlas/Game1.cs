@@ -42,6 +42,7 @@ namespace Samples.Atlas
 
             rt = new RenderTarget2D(GraphicsDevice, atlasSize.Width, atlasSize.Height);
 
+            // Load Atlas
             atlasMipmapPerSprite = Content.Load<TextureAtlas>("atlasMipmapPerSprite");
             atlasMipmap = Content.Load<TextureAtlas>("atlasMipmap");
             atlasNoMipmap = Content.Load<TextureAtlas>("atlasNoMipmap");
@@ -89,41 +90,21 @@ namespace Samples.Atlas
             GraphicsDevice.Clear(Color.Black);
 
             var currentAtlas = (useGenerateBitmap) ? (useMipmapPerSprite ? atlasMipmapPerSprite : atlasMipmap) : atlasNoMipmap;
-
-            spriteBatch.Begin();
-
+            
             if (showAtlas)
             {
+                spriteBatch.Begin();
                 spriteBatch.Draw(currentAtlas.Texture, mipSize, Color.White);
+                spriteBatch.End();
             }
             else
             {
-                var sprite18 = currentAtlas.Sprites["18"];
-                var destRect = new Rectangle(128, 128, sprite18.SourceRectangle.Width, sprite18.SourceRectangle.Height);
-                destRect.X /= mipLevel2;
-                destRect.Y /= mipLevel2;
-                destRect.Width = Math.Max(1, destRect.Width / mipLevel2);
-                destRect.Height = Math.Max(1, destRect.Height / mipLevel2);
-                spriteBatch.Draw(sprite18, destRect, Color.White);
-
-                var spriteMushroom_2 = currentAtlas.Sprites["Mushroom_2"];
-                destRect = new Rectangle(256 + 128, 128, spriteMushroom_2.SourceRectangle.Width, spriteMushroom_2.SourceRectangle.Height);
-                destRect.X /= mipLevel2;
-                destRect.Y /= mipLevel2;
-                destRect.Width = Math.Max(1, destRect.Width / mipLevel2);
-                destRect.Height = Math.Max(1, destRect.Height / mipLevel2);
-                spriteBatch.Draw(spriteMushroom_2, destRect, Color.White);
-                
-                var sprite10 = currentAtlas.Sprites["10"];
-                destRect = new Rectangle(512, 128, sprite10.SourceRectangle.Width, sprite10.SourceRectangle.Height);
-                destRect.X /= mipLevel2;
-                destRect.Y /= mipLevel2;
-                destRect.Width = Math.Max(1, destRect.Width / mipLevel2);
-                destRect.Height = Math.Max(1, destRect.Height / mipLevel2);
-                spriteBatch.Draw(sprite10, destRect, Color.White);
-
+                var scaleMtx = Matrix.CreateScale(1f/mipLevel2);
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, scaleMtx);
+                // Draw sprites from Atlas
+                DrawSprites(gameTime, spriteBatch, currentAtlas);
+                spriteBatch.End();
             }
-            spriteBatch.End();
 
 
             GraphicsDevice.SetRenderTarget(null);
@@ -141,6 +122,17 @@ namespace Samples.Atlas
 
             base.Draw(gameTime);
         }
-        
+
+        private void DrawSprites(GameTime gameTime, SpriteBatch spriteBatch, TextureAtlas atlas)
+        {
+            var sprite18 = atlas.Sprites["18"];
+            spriteBatch.Draw(sprite18, new Vector2(128,128), Color.White);
+
+            var spriteMushroom_2 = atlas.Sprites["Mushroom_2"];
+            spriteBatch.Draw(spriteMushroom_2, new Vector2(256 + 128, 128), Color.White);
+
+            var sprite10 = atlas.Sprites["10"];
+            spriteBatch.Draw(sprite10, new Vector2(512, 128), Color.White);
+        }
     }
 }
