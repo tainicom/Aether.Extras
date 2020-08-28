@@ -75,10 +75,10 @@ namespace tainicom.Aether.Shaders
         internal static byte[] LoadEffectResource(string name)
         {
             using (var stream = GetAssembly(typeof(InfiniteGridEffect)).GetManifestResourceStream(name))
-            using (var ms = new MemoryStream())
             {
-                stream.CopyTo(ms);
-                return ms.ToArray();
+                var bytecode = new byte[stream.Length];
+                stream.Read(bytecode, 0, (int)stream.Length);
+                return bytecode;
             }
         }
         
