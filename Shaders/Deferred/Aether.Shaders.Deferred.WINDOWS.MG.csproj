@@ -58,6 +58,11 @@
     <EmbeddedResource Include="Resources\DeferredCombine.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\DeferredPointLight.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\DeferredSpotLight.dx11.mgfxo.8" />
+    <EmbeddedResource Include="Resources\DeferredBasicEffect.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\DeferredClearGBuffer.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\DeferredCombine.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\DeferredPointLight.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\DeferredSpotLight.dx11.mgfxo.9" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
