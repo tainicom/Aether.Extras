@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\InfiniteGridEffect.HiDef.dx11.mgfxo.7" />
-    <EmbeddedResource Include="Resources\InfiniteGridEffect.HiDef.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\InfiniteGridEffect.Reach.dx11.mgfxo.7" />
+    <EmbeddedResource Include="Resources\InfiniteGridEffect.HiDef.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\InfiniteGridEffect.Reach.dx11.mgfxo.8" />
+    <EmbeddedResource Include="Resources\InfiniteGridEffect.HiDef.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\InfiniteGridEffect.Reach.dx11.mgfxo.9" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
