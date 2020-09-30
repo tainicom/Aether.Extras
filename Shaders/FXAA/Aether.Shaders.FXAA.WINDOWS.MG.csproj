@@ -56,6 +56,9 @@
     <EmbeddedResource Include="Resources\FXAAGreenLumaHigh.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\FXAAGreenLumaLow.dx11.mgfxo.8" />
     <EmbeddedResource Include="Resources\FXAAGreenLumaMedium.dx11.mgfxo.8" />
+    <EmbeddedResource Include="Resources\FXAAGreenLumaHigh.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\FXAAGreenLumaLow.dx11.mgfxo.9" />
+    <EmbeddedResource Include="Resources\FXAAGreenLumaMedium.dx11.mgfxo.9" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

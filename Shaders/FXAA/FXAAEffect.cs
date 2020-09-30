@@ -63,7 +63,7 @@ namespace tainicom.Aether.Shaders
             // Detect MG version
             var version = "";
 #if !XNA
-            version = ".8";
+            version = ".9";
             var mgVersion = GetAssembly(typeof(Effect)).GetName().Version;
             if (mgVersion.Major == 3)
             {
@@ -75,6 +75,8 @@ namespace tainicom.Aether.Shaders
                     version = ".8";
                 if (mgVersion.Minor == 7)
                     version = ".8";
+                if (mgVersion.Minor == 8)
+                    version = ".9";
             }
             name = name + version;
 #endif
