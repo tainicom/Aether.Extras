@@ -20,7 +20,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
-using tainicom.Aether.Content.Pipeline.Atlas;
 
 namespace tainicom.Aether.Content.Pipeline
 {
@@ -61,7 +60,7 @@ namespace tainicom.Aether.Content.Pipeline
         public TextureAtlasContent Process(TextureAtlasContent input, ContentProcessorContext context)
         {
             if (MipmapsPerSprite && GenerateMipmaps)
-                foreach (var texture in input.Textures)
+                foreach (var texture in input.SourceSprites)
                     texture.Texture.GenerateMipmaps(false);
 
             var output = input;
@@ -72,7 +71,7 @@ namespace tainicom.Aether.Content.Pipeline
                 {
                     var maxSpriteWidth = 1;
                     var maxSpriteHeight = 1;
-                    foreach (var sprite in input.Textures)
+                    foreach (var sprite in input.SourceSprites)
                     {
                         var face0 = sprite.Texture.Faces[0];
                         maxSpriteWidth = Math.Max(maxSpriteWidth, face0[0].Width);
@@ -89,12 +88,12 @@ namespace tainicom.Aether.Content.Pipeline
                         if ((maxSpriteWidth / mipLevel2) < 1 && (maxSpriteHeight / mipLevel2) < 1) break;
 
                         var mipmapBmp = new PixelBitmapContent<Color>(size.Width, size.Height);
-                        foreach (var sprite in input.Sprites)
+                        foreach (var sprite in input.DestinationSprites)
                         {
                             if (mipLevel >= sprite.Texture.Faces[0].Count) continue;
                             var srcBmp = sprite.Texture.Faces[0][mipLevel];
                             var srcRect = new Rectangle(0, 0, srcBmp.Width, srcBmp.Height);
-                            var destRect = sprite.DestinationRectangle;
+                            var destRect = sprite.Bounds;
                             destRect.X = (int)Math.Ceiling((float)destRect.X / mipLevel2);
                             destRect.Y = (int)Math.Ceiling((float)destRect.Y / mipLevel2);
                             destRect.Width = (int)(destRect.Width / mipLevel2);
@@ -102,10 +101,10 @@ namespace tainicom.Aether.Content.Pipeline
                             if (destRect.Width > 1 && destRect.Height > 1)
                                 BitmapContent.Copy(srcBmp, srcRect, mipmapBmp, destRect);
                         }
-                        output.Mipmaps.Add(mipmapBmp);
+                        output.Texture.Mipmaps.Add(mipmapBmp);
                     }
 
-                    var outputFace0 = output.Faces[0];
+                    var outputFace0 = output.Texture.Faces[0];
                     while (outputFace0[outputFace0.Count - 1].Width > 1 || outputFace0[outputFace0.Count - 1].Height > 1)
                     {
                         var lastMipmap = outputFace0[outputFace0.Count - 1];
@@ -113,12 +112,12 @@ namespace tainicom.Aether.Content.Pipeline
                         var h = Math.Max(1, lastMipmap.Height/2);
                         var mipmapBmp = new PixelBitmapContent<Color>(w, h);
                         //PixelBitmapContent<Color>.Copy(lastMipmap, mipmapBmp);
-                        output.Mipmaps.Add(mipmapBmp);
+                        output.Texture.Mipmaps.Add(mipmapBmp);
                     }
                 }
                 else
                 {
-                    output.GenerateMipmaps(false);
+                    output.Texture.GenerateMipmaps(false);
                 }
             }
             
@@ -127,12 +126,12 @@ namespace tainicom.Aether.Content.Pipeline
             if (MipmapsPerSprite && GenerateMipmaps)
             {
                 GenerateMipmaps = false;
-                base.Process(output, context);
+                base.Process(output.Texture, context);
                 GenerateMipmaps = true;
             }
             else
             {
-                base.Process(output, context);
+                base.Process(output.Texture, context);
             }
             
             return output;

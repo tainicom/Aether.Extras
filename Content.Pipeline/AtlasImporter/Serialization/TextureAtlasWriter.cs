@@ -14,12 +14,11 @@
 //   limitations under the License.
 #endregion
 
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
-using tainicom.Aether.Content.Pipeline.Atlas;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace tainicom.Aether.Content.Pipeline.Serialization
 {
@@ -28,17 +27,18 @@ namespace tainicom.Aether.Content.Pipeline.Serialization
     {
         protected override void Write(ContentWriter output, TextureAtlasContent atlas)
         {
-            output.WriteRawObject((Texture2DContent)atlas);
+            output.WriteRawObject((Texture2DContent)atlas.Texture);
             
             // write Sprites
-            output.Write(atlas.Sprites.Count);
-            foreach(var sprite in atlas.Sprites)
+            output.Write(atlas.DestinationSprites.Count);
+            foreach(var name in atlas.Sprites.Keys)
             {
-                output.Write(sprite.Name);
-                output.Write(sprite.DestinationRectangle.X);
-                output.Write(sprite.DestinationRectangle.Y);
-                output.Write(sprite.DestinationRectangle.Width);
-                output.Write(sprite.DestinationRectangle.Height);
+                var sprite = atlas.Sprites[name];
+                output.Write(name);
+                output.Write(sprite.Bounds.X);
+                output.Write(sprite.Bounds.Y);
+                output.Write(sprite.Bounds.Width);
+                output.Write(sprite.Bounds.Height);
             }
             
             return;

@@ -17,12 +17,24 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
+
 namespace tainicom.Aether.Content.Pipeline
 {
     public class SpriteContent
     {
         public TextureContent Texture;
-        public Rectangle DestinationRectangle;
-        public string Name;
+        public Rectangle Bounds;
+
+        public SpriteContent()
+        {
+            this.Texture = null;
+            this.Bounds = Rectangle.Empty;
+        }
+
+        public SpriteContent(SpriteContent other)
+        {
+            this.Texture = other.Texture;
+            this.Bounds = other.Bounds;
+        }
     }
 }

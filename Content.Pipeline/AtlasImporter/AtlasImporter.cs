@@ -23,7 +23,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Graphics;
-using tainicom.Aether.Content.Pipeline.Atlas;
 
 namespace tainicom.Aether.Content.Pipeline
 {
@@ -39,6 +38,7 @@ namespace tainicom.Aether.Content.Pipeline
             else
                 throw new InvalidContentException("File type not supported");
 
+            PackSprites(output);
             RenderAtlas(output);
             
             return output;
@@ -56,45 +56,81 @@ namespace tainicom.Aether.Content.Pipeline
             var orientation = GetAttribute(map, "orientation");
             if (orientation != "orthogonal")
                 throw new InvalidContentException("Invalid orientation. Only 'orthogonal' is supported for atlases.");
-            var renderorder = GetAttribute(map, "renderorder");
-            var mapColumns = GetAttributeAsInt(map, "width").Value;
-            var mapRows = GetAttributeAsInt(map, "height").Value;
-            var tileWidth = GetAttributeAsInt(map, "tilewidth").Value;
-            var tileHeight = GetAttributeAsInt(map, "tileheight").Value;
-            output.Width = mapColumns * tileWidth;
-            output.Height = mapRows * tileHeight;
-            
+            output.Renderorder = GetAttribute(map, "renderorder");
+            output.MapColumns = GetAttributeAsInt(map, "width").Value;
+            output.MapRows = GetAttributeAsInt(map, "height").Value;
+            output.TileWidth = GetAttributeAsInt(map, "tilewidth").Value;
+            output.TileHeight = GetAttributeAsInt(map, "tileheight").Value;
+            output.Width = output.MapColumns * output.TileWidth;
+            output.Height = output.MapRows * output.TileHeight;
+
             XmlNode tileset = map["tileset"];
+            output.Firstgid = GetAttributeAsInt(tileset, "firstgid").Value;
+
             if (tileset.Attributes["source"] != null)
-                throw new InvalidContentException("External Tileset is not supported.");
+            {
+                var tsxFilename = tileset.Attributes["source"].Value;
+                var baseDirectory = Path.GetDirectoryName(filename);
+                tsxFilename = Path.Combine(baseDirectory, tsxFilename);
+                var sourceSprites = ImportTSX(tsxFilename, context);
+                output.SourceSprites.AddRange(sourceSprites);
+                context.AddDependency(tsxFilename);
+            }
+            else
+            {
+                var rootDirectory = Path.GetDirectoryName(filename);
+                var sourceSprites = ImportTileset(tileset, context, rootDirectory);
+                output.SourceSprites.AddRange(sourceSprites);
+            }
+
+            XmlNode layerNode = map["layer"];
+            var layerColumns = Convert.ToInt32(map.Attributes["width"].Value, CultureInfo.InvariantCulture);
+            var layerRows = Convert.ToInt32(map.Attributes["height"].Value, CultureInfo.InvariantCulture);
+            output.LayerColumns = layerColumns;
+            output.LayerRows = layerRows;
+
+            XmlNode layerDataNode = layerNode["data"];
+            var encoding = layerDataNode.Attributes["encoding"].Value;
+            if (encoding != "csv")
+                throw new InvalidContentException("Invalid encoding. Only 'csv' is supported for data.");
+            var data = layerDataNode.InnerText;
+            var dataStringList = data.Split(',');
+            var mapData = new int[dataStringList.Length];
+            for (int i = 0; i < dataStringList.Length; i++)
+                mapData[i] = Convert.ToInt32(dataStringList[i].Trim(), CultureInfo.InvariantCulture);
+            output.MapData = mapData;
+
+            return output;
+        }
+
+        private static List<SpriteContent> ImportTileset(XmlNode tileset, ContentImporterContext context, string baseDirectory)
+        {
+            List<SpriteContent> images = new List<SpriteContent>();
+
             if (tileset["tileoffset"] != null)
                 throw new InvalidContentException("tileoffset is not supported.");
-            var firstgid = GetAttributeAsInt(tileset, "firstgid").Value;
 
-            Dictionary<int, SourceContent> images = new Dictionary<int, SourceContent>();
-            TextureImporter txImporter = new TextureImporter();
-            
             foreach (XmlNode tileNode in tileset.ChildNodes)
             {
                 if (tileNode.Name != "tile") continue;
                 var tileId = GetAttributeAsInt(tileNode, "id").Value;
+                if (tileId != images.Count)
+                    throw new InvalidContentException("Invalid id");
                 XmlNode imageNode = tileNode["image"];
-                
-                var source = new SourceContent();
+
 
                 //var format = GetAttribute(imageNode, "format");
                 var imageSource = GetAttribute(imageNode, "source");
-                var fullImageSource = Path.Combine(Path.GetDirectoryName(filename), imageSource);
+                var fullImageSource = Path.Combine(baseDirectory, imageSource);
+                TextureImporter txImporter = new TextureImporter();
                 var textureContent = (Texture2DContent)txImporter.Import(fullImageSource, context);
                 textureContent.Name = Path.GetFileNameWithoutExtension(fullImageSource);
 
+                var source = new SpriteContent();
                 source.Texture = textureContent;
-
-                var width = GetAttributeAsInt(imageNode, "width");
-                var height = GetAttributeAsInt(imageNode, "height");
-
-                source.Width = width ?? textureContent.Mipmaps[0].Width;
-                source.Height = height ?? textureContent.Mipmaps[0].Height;
+                source.Bounds.Location = Point.Zero;
+                source.Bounds.Width  = textureContent.Mipmaps[0].Width;
+                source.Bounds.Height = textureContent.Mipmaps[0].Height;
 
                 var transKeyColor = GetAttributeAsColor(imageNode, "trans");
                 if (transKeyColor != null)
@@ -102,64 +138,62 @@ namespace tainicom.Aether.Content.Pipeline
                         foreach (var mip in mips)
                             ((PixelBitmapContent<Color>)mip).ReplaceColor(transKeyColor.Value, Color.Transparent);
 
-                images.Add(firstgid + tileId, source);
+                images.Add(source);
             }
 
-            output.Textures.AddRange(images.Values);
-            
-            XmlNode layerNode = map["layer"];
-            var layerColumns = Convert.ToInt32(map.Attributes["width"].Value, CultureInfo.InvariantCulture);
-            var layerRows = Convert.ToInt32(map.Attributes["height"].Value, CultureInfo.InvariantCulture);
+            return images;
+        }
 
-            XmlNode layerDataNode = layerNode["data"];
-            var encoding = layerDataNode.Attributes["encoding"].Value;
-            if (encoding!="csv")
-                throw new InvalidContentException("Invalid encoding. Only 'csv' is supported for data.");
-            var data = layerDataNode.InnerText;
-            var dataList = data.Split(',');
-            for (int i = 0; i < dataList.Length; i++)
-                dataList[i] = dataList[i].Trim();
-            
-            for(int y=0;y<layerRows;y++)
+        private static void PackSprites(TextureAtlasContent output)
+        {
+            for (int y = 0; y < output.LayerRows; y++)
             {
-                for(int x=0;x<layerColumns;x++ )
+                for (int x = 0; x < output.LayerColumns; x++)
                 {
-                    var posX = x * tileWidth;
-                    var posY = y * tileHeight;
-                    
-                    var tilegId = Convert.ToInt32(dataList[y * layerColumns + x], CultureInfo.InvariantCulture);
-                    SourceContent image; 
-                    if (!images.TryGetValue(tilegId, out image))
-                        continue;
+                    var posX = x * output.TileWidth;
+                    var posY = y * output.TileHeight;
 
-                    if (renderorder == "right-down" || renderorder == "right-up")
-                        posX += (tileWidth - image.Width);
-                    if (renderorder == "right-down" || renderorder == "left-down")
-                        posY += (tileHeight - image.Height);
+                    var tilegId = output.MapData[y * output.LayerColumns + x];
+                    if (tilegId == 0) continue;
+                    tilegId -= output.Firstgid;
 
-                    var sprite = new SpriteContent();
-                    sprite.Name = image.Texture.Name;
-                    sprite.Texture = image.Texture;
-                    sprite.DestinationRectangle = new Rectangle(posX, posY, image.Width, image.Height);
+                    SpriteContent srcSprite = output.SourceSprites[tilegId];
 
-                    output.Sprites.Add(sprite);
+                    if (output.Renderorder == "right-down" || output.Renderorder == "right-up")
+                        posX += (output.TileWidth - srcSprite.Bounds.Width);
+                    if (output.Renderorder == "right-down" || output.Renderorder == "left-down")
+                        posY += (output.TileHeight - srcSprite.Bounds.Height);
+
+                    var newSprite = new SpriteContent(srcSprite);
+                    newSprite.Bounds.Location = new Point(posX, posY);
+
+                    output.DestinationSprites.Add(newSprite);
+                    var name = srcSprite.Texture.Name;
+                    output.Sprites.Add(name, newSprite);
                 }
             }
-            
-            return output;
+        }
+
+        private static List<SpriteContent> ImportTSX(string tsxFilename, ContentImporterContext context)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(tsxFilename);
+            XmlNode tileset = xmlDoc.DocumentElement;
+            var baseDirectory = Path.GetDirectoryName(tsxFilename);
+            return ImportTileset(tileset, context, baseDirectory);
         }
 
         private static void RenderAtlas(TextureAtlasContent output)
         {
             var outputBmp = new PixelBitmapContent<Color>(output.Width, output.Height);
-            foreach (var sprite in output.Sprites)
+            foreach (var sprite in output.DestinationSprites)
             {
                 var srcBmp = sprite.Texture.Faces[0][0];
                 var srcRect = new Rectangle(0, 0, srcBmp.Width, srcBmp.Height);
-                BitmapContent.Copy(srcBmp, srcRect, outputBmp, sprite.DestinationRectangle);
+                BitmapContent.Copy(srcBmp, srcRect, outputBmp, sprite.Bounds);
             }
             var mipmapChain = new MipmapChain(outputBmp);
-            output.Mipmaps = mipmapChain;
+            output.Texture.Mipmaps = mipmapChain;
         }
         
         private static string GetAttribute(XmlNode xmlNode, string attributeName)

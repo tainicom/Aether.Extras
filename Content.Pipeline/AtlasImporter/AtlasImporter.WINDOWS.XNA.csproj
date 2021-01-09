@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtlasImporter.cs" />
-    <Compile Include="Atlas\SourceContent.cs" />
     <Compile Include="Atlas\TextureAtlasContent.cs" />
     <Compile Include="Atlas\SpriteContent.cs" />
     <Compile Include="Processors\TextureAtlasProcessor.cs" />

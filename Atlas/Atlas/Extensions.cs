@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016 Kastellanos Nikolaos
+//   Copyright 2016-2021 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #endregion
 
 using Microsoft.Xna.Framework;
-using tainicom.Aether.Atlas;
+using tainicom.Aether.Graphics;
 
 namespace Microsoft.Xna.Framework.Graphics
 {
@@ -23,12 +23,12 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position, Color color)
         {
-            spriteBatch.Draw(sprite.Texture, position, sprite.SourceRectangle, color);         
+            spriteBatch.Draw(sprite.Texture, position, sprite.Bounds, color);
         }
         
         public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Rectangle destinationRectangle, Color color)
         {
-            spriteBatch.Draw(sprite.Texture, destinationRectangle, sprite.SourceRectangle, color);
+            spriteBatch.Draw(sprite.Texture, destinationRectangle, sprite.Bounds, color);
         }
     }
 }

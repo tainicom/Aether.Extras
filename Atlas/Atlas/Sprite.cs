@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016 Kastellanos Nikolaos
+//   Copyright 2016-2021 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -17,17 +17,17 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace tainicom.Aether.Atlas
+namespace tainicom.Aether.Graphics
 {
     public class Sprite
     {
         public readonly Texture2D Texture;
-        public readonly Rectangle SourceRectangle;
+        public readonly Rectangle Bounds;
 
-        internal Sprite(Texture2D texture, Rectangle sourceRectangle)
+        internal Sprite(Texture2D texture, Rectangle bounds)
         {
             this.Texture = texture;
-            this.SourceRectangle = sourceRectangle;
+            this.Bounds = bounds;
         }
     }
 }

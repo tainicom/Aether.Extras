@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016 Kastellanos Nikolaos
+//   Copyright 2016-2021 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -17,12 +17,13 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace tainicom.Aether.Atlas
+namespace tainicom.Aether.Graphics
 {
     public class TextureAtlas
     {
-        public Texture2D Texture {get; internal set;}
+        public Texture2D Texture { get; internal set; }
         public readonly Dictionary<string, Sprite> Sprites;
+
         internal TextureAtlas()
         {
             this.Sprites = new Dictionary<string, Sprite>();

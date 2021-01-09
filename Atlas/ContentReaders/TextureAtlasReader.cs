@@ -1,5 +1,5 @@
 ﻿#region License
-//   Copyright 2016-2019 Kastellanos Nikolaos
+//   Copyright 2016-2021 Kastellanos Nikolaos
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using tainicom.Aether.Atlas;
+using tainicom.Aether.Graphics;
 
 namespace tainicom.Aether.Graphics.Content
 {
@@ -40,8 +40,8 @@ namespace tainicom.Aether.Graphics.Content
             for (int i = 0; i < count; i++)
             {
                 var name = input.ReadString();
-                var destinationRect = new Rectangle(input.ReadInt32(), input.ReadInt32(), input.ReadInt32(), input.ReadInt32());
-                output.Sprites[name] = new Sprite(output.Texture, destinationRect);
+                var bounds = new Rectangle(input.ReadInt32(), input.ReadInt32(), input.ReadInt32(), input.ReadInt32());
+                output.Sprites[name] = new Sprite(output.Texture, bounds);
             }
 
             return output;

@@ -15,15 +15,28 @@
 #endregion
 
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 
-namespace tainicom.Aether.Content.Pipeline.Atlas
+namespace tainicom.Aether.Content.Pipeline
 {
     public class TextureAtlasContent : Texture2DContent
     {
-        public int Width, Height;
+        public Texture2DContent Texture { get { return this; } }
+        public readonly Dictionary<string, SpriteContent> Sprites = new Dictionary<string, SpriteContent>();
 
-        public List<SourceContent> Textures = new List<SourceContent>();
-        public List<SpriteContent> Sprites = new List<SpriteContent>();
+        internal readonly List<SpriteContent> SourceSprites = new List<SpriteContent>();
+        internal readonly List<SpriteContent> DestinationSprites = new List<SpriteContent>();
+
+        internal int MapColumns, MapRows;
+        internal int TileWidth, TileHeight;
+        internal int Width, Height;
+
+        internal string Renderorder;
+        internal int Firstgid;
+        internal int LayerColumns, LayerRows;
+        internal int[] MapData;
+        
+        
     }
 }

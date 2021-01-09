@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{E5907795-BC19-4CAA-9909-9F7145E1BB0D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>tainicom.Aether.Atlas</RootNamespace>
+    <RootNamespace>tainicom.Aether.Graphics</RootNamespace>
     <AssemblyName>Aether.Atlas</AssemblyName>
     <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
