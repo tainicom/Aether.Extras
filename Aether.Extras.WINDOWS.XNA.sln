@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLMCImporter.WINDOWS.XNA", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelImporters.WINDOWS.XNA", "Content.Pipeline\VoxelImporters\VoxelImporters.WINDOWS.XNA.csproj", "{0690782F-0000-0000-0000-000000000000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Tilemap.WINDOWS.XNA", "Tilemap\Aether.Tilemap.WINDOWS.XNA.csproj", "{746551BA-FB64-43B0-8479-0506B930D3E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -83,6 +85,10 @@ Global
 		{0690782F-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
 		{0690782F-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
 		{0690782F-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{746551BA-FB64-43B0-8479-0506B930D3E5}.Debug|x86.ActiveCfg = Debug|x86
+		{746551BA-FB64-43B0-8479-0506B930D3E5}.Debug|x86.Build.0 = Debug|x86
+		{746551BA-FB64-43B0-8479-0506B930D3E5}.Release|x86.ActiveCfg = Release|x86
+		{746551BA-FB64-43B0-8479-0506B930D3E5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

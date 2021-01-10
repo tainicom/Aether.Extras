@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLMCImporter.WINDOWS.MG", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelImporters.WINDOWS.MG", "Content.Pipeline\VoxelImporters\VoxelImporters.WINDOWS.MG.csproj", "{AA15CF95-0AF2-4346-9465-CB6EDBE22ED9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aether.Tilemap.WINDOWS.MG", "Tilemap\Aether.Tilemap.WINDOWS.MG.csproj", "{7BD9F460-F3F9-40A0-B298-066EA975C06C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{AA15CF95-0AF2-4346-9465-CB6EDBE22ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA15CF95-0AF2-4346-9465-CB6EDBE22ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA15CF95-0AF2-4346-9465-CB6EDBE22ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BD9F460-F3F9-40A0-B298-066EA975C06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD9F460-F3F9-40A0-B298-066EA975C06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD9F460-F3F9-40A0-B298-066EA975C06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD9F460-F3F9-40A0-B298-066EA975C06C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
