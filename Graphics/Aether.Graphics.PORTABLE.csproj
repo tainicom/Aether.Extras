@@ -40,7 +40,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.2.99.1-Beta">
+    <PackageReference Include="MonoGame.Framework.Portable.9000" Version="3.8.9008">
       <PrivateAssets>all</PrivateAssets>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
