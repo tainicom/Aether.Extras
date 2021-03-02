@@ -5,4 +5,6 @@ Command-line utility that uses the Content Pipeline to compile a .fx source file
 source: 
 http://xbox.create.msdn.com/en-us/education/catalog/sample/stock_effects/
 https://github.com/DDReaper/XNAGameStudio/wiki/Stock%20Effects
+https://github.com/nkast/XNAGameStudio/tree/master/Samples/Stock-Effects
+
 
