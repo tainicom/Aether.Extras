@@ -90,13 +90,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework" Condition=" '$(Platform)' == 'ARM' ">
-      <HintPath>..\packages\MonoGame.Framework.Portable.3.2.99.1-Beta\lib\portable-net40+sl40+win+wp80\MonoGame.Framework.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.Portable.3.2.99.1-Beta\lib\portable-net40+sl40+win+wp80\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.Portable.9000.3.8.9008\lib\portable-net40+sl5+win8+wpa81+wp8\MonoGame.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX" Condition=" '$(Platform)' == 'x86' ">
