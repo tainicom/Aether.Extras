@@ -488,7 +488,7 @@ namespace tainicom.Aether.Shaders
             {
                 int shaderIndex = 0;
                 
-                if (!fogEnabled)
+                if (fogEnabled)
                     shaderIndex += 1;
                 
                 if (vertexColorEnabled)
