@@ -59,7 +59,7 @@ namespace tainicom.Aether.Content.Pipeline
             uint[] palette = voxel.Palette;
 
             var scale = voxel.RealSize / voxel.GridSize;
-            Vector3 centerOffset = new Vector3(1f, 0f, 1f) * (voxel.RealSize / -2f);
+            Vector3 centerOffset = new Vector3(1f, 1f, 1f) * (voxel.RealSize / -2f);
 
             var corner000 = new Point3(0, 0, 0);
             var corner100 = new Point3(1, 0, 0);
