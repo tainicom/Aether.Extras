@@ -1,6 +1,8 @@
 # Aether.Extras
 MonoGame Content Importers, Shaders, etc
 
+# **NEW HOME: https://github.com/nkast/Aether.Extras/releases**
+
 
 ## Content Importers
 
